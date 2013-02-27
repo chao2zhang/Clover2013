@@ -67,6 +67,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    '/Users/chaozhang/Development/clover/server/ifttt/static',
 )
 
 # List of finder classes that know how to find static files in
@@ -95,6 +96,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'djangoflash.middleware.FlashMiddleware',
 )
 
 ROOT_URLCONF = 'ifttt.urls'
@@ -120,6 +122,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'registration',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -152,4 +155,9 @@ LOGGING = {
 }
 
 from django.core.urlresolvers import reverse_lazy
-LOGIN_REDIRECT_URL = reverse_lazy('dashboard')
+LOGIN_REDIRECT_URL = '/dashboard/'
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'djangoflash.context_processors.flash',
+)
+
