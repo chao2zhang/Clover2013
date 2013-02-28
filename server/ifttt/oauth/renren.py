@@ -33,14 +33,11 @@ class RenrenConfig:
 				#'addCommentToStatus': SupportedAPI('status.addComment', ['read_user_status' ,'publish_comment']),
 				#'addCommentToBlog': SupportedAPI('blog.addComment', ['publish_blog' ,'publish_comment'])
 		}
-
 		AUTHORIZATION_URI = "http://graph.renren.com/oauth/authorize"
 		ACCESS_TOKEN_URI = "http://graph.renren.com/oauth/token"
 		SESSION_KEY_URI = "http://graph.renren.com/renren_api/session_key"
 		API_SERVER = "http://api.renren.com/restserver.do"
-		LOGIN_SUCCESS = "http://graph.renren.com/oauth/login_success.html"
-
-
+		LOGIN_SUCCESS = "http://127.0.0.1/bind/renren/"
 
 import hashlib
 import time
@@ -88,13 +85,8 @@ class RenrenClient(object):
 			'redirect_uri': RenrenConfig.LOGIN_SUCCESS,
 		}
 		response = urllib.urlopen("%s?%s" % (RenrenConfig.ACCESS_TOKEN_URI, urllib.urlencode(args))).read()
-		log(response)
 		self.access_token = parse_json(response)["access_token"]
-		'''Obtain session key from the Resource Service.''' 
-		session_key_request_args = {"oauth_token": access_token}
-		response = urllib.urlopen("%s?%s" % (RenrenConfig.SESSION_KEY_URI, urllib.urlencode(session_key_request_args))).read()
-		log(response)
-		self.session_key = str(parse_json(response)["renren_token"]["session_key"])
+        return self.access_token
 
 	def request(self, reqName, params = {}):
 		if reqName in RenrenConfig.SUPPORTED_REQUESTS.keys():
@@ -103,7 +95,7 @@ class RenrenClient(object):
 				params["api_key"] = self.api_key
 				params["call_id"] = str(int(time.time() * 1000))
 				params["format"] = "json"
-				params["session_key"] = self.session_key
+				params["access_token"] = self.access_token
 				params["v"] = '1.0'
 				sig = self.hash_params(params);
 				params["sig"] = sig
