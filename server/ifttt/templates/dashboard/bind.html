@@ -2,8 +2,8 @@
 
 {% block title %}Dashboard{% endblock %}
 
-
 {% load oauth_tags %}
+{% load staticfiles %}
 
 {% block content %}
 {% if flash %}
@@ -13,8 +13,23 @@
         </div>
     {% endfor %}
 {% endif %}
-<a href="">Bind Renren</a>
-<a href="{% weibo_auth_uri %}">Bind Weibo</a>
-<a href="/dashboard">Bind Gmail</a>
+<div>
+    <a href="">
+        <img src="{% static "img/renren.png" %}"/>
+    </a>
+</div>
+<div>
+    <a href="{% weibo_auth_uri %}">
+        <img src="{% static "img/weibo.png" %}"/>
+    </a>
+</div>
+<div>
+    <a href="/dashboard">Bind Gmail</a>
+</div>
+<div>
+    <a href="">
+        <img src="{% static "img/fetion.jpg" %}"/>
+    </a>
+</div>
 
 {% endblock %}

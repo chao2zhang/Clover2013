@@ -76,7 +76,7 @@ class RenrenClient(object):
         print response
         self.session_key = str(parse_json(response)["renren_token"]["session_key"])
 
-    def request(self, params = {}):
+    def request(self, params = {}}):
         """
         Fetches the given method's response returning from RenRen API.
         Send a POST request to the given method with the given params.

@@ -17,7 +17,7 @@ def bind(request):
 def bind_weibo(request):
     if request.GET.get('code'):
         request.flash['message'] = 'Weibo binded successfully'
-        wa, created= WeiboAccount.objects.get_or_create(user=request.user)
+        wa, created = WeiboAccount.objects.get_or_create(user=request.user)
         wa.access_token = request.GET['code']
         wa.save()
     else:
