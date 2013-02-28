@@ -14,9 +14,11 @@
         <div id="navigator">
             {% block sidebar %}
             <ul class="nav nav-pills pull-right">
-                <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="{% url 'register' %}">Register</a></li>
-                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                <li><a href="/tasks/new/">New Task</a></li>
+                <li><a href="/tasks/">Tasks</a></li>
+                <li><a href="{% url 'bind' %}">Bind</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
             </ul>
             <h3 class="muted">Ifttt</h3>
             {% endblock %}

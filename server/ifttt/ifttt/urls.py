@@ -14,9 +14,12 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
-    url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
-    url(r'^accounts/register/$', 'registration.views.register'),
-    url(r'^$', 'registration.views.home'),
+    url(r'^accounts/login/$', 'django.contrib.auth.views.login', name='login'),
+    url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', name='logout'),
+    url(r'^accounts/register/$', 'registration.views.register', name='register'),
+    url(r'^$', 'registration.views.home', name='home'),
 
-    url(r'^dashboard/$', 'ifttt.views.dashboard'),
+    url(r'^dashboard/$', 'app.views.dashboard', name='dashboard'),
+    url(r'^bind/$', 'app.views.bind', name='bind'),
+    url(r'^bind/weibo/$', 'app.views.bind_weibo', name='bind_weibo'),
 )

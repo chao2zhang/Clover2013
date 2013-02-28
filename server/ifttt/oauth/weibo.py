@@ -17,11 +17,9 @@
 class WeiboConfig:
     APP_API_KEY = "1151462392"
     APP_SECRET_KEY = "5a8e10eab579cdc5e308533df6794835"
-
     AUTHORIZATION_URI = "https://api.weibo.com/oauth2/authorize"
     ACCESS_TOKEN_URI = "https://api.weibo.com/oauth2/access_token"
-    LOGIN_SUCCESS = "http://graph.renren.com/oauth/login_success.html"
-    
+    LOGIN_SUCCESS = "http://127.0.0.1/bind/weibo/"
 
 import hashlib
 import time
@@ -46,15 +44,18 @@ class Weibo(object):
         self.secret_key = secret_key
         self.access_token = access_token
     
-    def auth(self):
+    @staticmethod
+    def auth_uri():
         args = {
-            'client_id': self.api_key,
+            'client_id': WeiboConfig.APP_API_KEY,
             'response_type': 'code',
             'redirect_uri': WeiboConfig.LOGIN_SUCCESS,
             'scope': 'status_update',
         }
-        url = "%s?%s" % (WeiboConfig.AUTHORIZATION_URI, urllib.urlencode(args))
-        print 'Please authorize: ' + url
+        return "%s?%s" % (WeiboConfig.AUTHORIZATION_URI, urllib.urlencode(args))
+
+    def auth(self):
+        print 'Please authorize: ' + self.auth_uri()
         verification_code = raw_input('PIN:')
         args = {
             'client_id': self.api_key,

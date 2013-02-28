@@ -12,9 +12,11 @@ def register(request):
         if form.is_valid():
             user = form.save()
             request.flash['message'] = 'Account created successfully'
-            return redirect('django.contrib.auth.views.login')
+            return redirect('login')
     return render_to_response(t, {'form': form}, context_instance=RequestContext(request))
 
 def home(request):
+    if request.user.is_authenticated():
+        return redirect('dashboard')
     t = 'registration/home.html'
     return render_to_response(t, context_instance=RequestContext(request))

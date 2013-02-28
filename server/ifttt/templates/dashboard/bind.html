@@ -1,0 +1,20 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+
+{% load oauth_tags %}
+
+{% block content %}
+{% if flash %}
+    {% for key, value in flash.items %}
+        <div class="flash_{{ key }}">
+            <p>{{ value }}</p>
+        </div>
+    {% endfor %}
+{% endif %}
+<a href="">Bind Renren</a>
+<a href="{% weibo_auth_uri %}">Bind Weibo</a>
+<a href="/dashboard">Bind Gmail</a>
+
+{% endblock %}
