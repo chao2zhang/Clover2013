@@ -22,4 +22,5 @@ urlpatterns = patterns('',
     url(r'^dashboard/$', 'app.views.dashboard', name='dashboard'),
     url(r'^bind/$', 'app.views.bind', name='bind'),
     url(r'^bind/weibo/$', 'app.views.bind_weibo', name='bind_weibo'),
+    url(r'^bind/renren/$', 'app.views.bind_renren', name='bind_renren'),
 )

@@ -13,23 +13,27 @@
         </div>
     {% endfor %}
 {% endif %}
-<div>
-    <a href="">
-        <img src="{% static "img/renren.png" %}"/>
-    </a>
-</div>
-<div>
-    <a href="{% weibo_auth_uri %}">
-        <img src="{% static "img/weibo.png" %}"/>
-    </a>
-</div>
-<div>
-    <a href="/dashboard">Bind Gmail</a>
-</div>
-<div>
-    <a href="">
-        <img src="{% static "img/fetion.jpg" %}"/>
-    </a>
+<div class="row">
+    <div class="span1">
+        <a href="{% renren_auth_uri %}">
+            <img src="{% static "img/renren.png" %}"/>
+        </a>
+    </div>
+    <div class="span1">
+        <a href="{% weibo_auth_uri %}">
+            <img src="{% static "img/weibo.png" %}"/>
+        </a>
+    </div>
+    <div class="span1">
+        <a href="">
+            <img src="{% static "img/fudan.jpg" %}"/>
+        </a>
+    </div>
+    <div class="span1">
+        <a href="">
+            <img src="{% static "img/fetion.jpg" %}"/>
+        </a>
+    </div>
 </div>
 
 {% endblock %}
