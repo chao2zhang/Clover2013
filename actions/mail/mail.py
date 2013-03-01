@@ -2,7 +2,7 @@ def log(msg):
 	print(msg)
 
 class MailConfig:
-	POP_SERVER_NAME = "pop3.163.com"
+	POP_SERVER_NAME = "mail.fudan.edu.cn"
 	SMTP_SERVER_NAME = "mail.fudan.edu.cn"
 
 import poplib, smtplib
@@ -17,6 +17,12 @@ class PopClient:
 		self.server.user(user)
 		self.server.pass_(pwd)
 	
+	def count(self):
+		"""
+		return number of mails
+		"""
+		return self.server.stat()[0]
+
 	def fetch(self, index):
 		"""
 		index starts from 1
