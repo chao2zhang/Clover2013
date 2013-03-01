@@ -50,4 +50,5 @@ class SmtpClient:
 		self.server.sendmail(fro, to, msg.as_string())
 
 if __name__ == '__main__':
+	pass
 	#smtp.send("10300240067@fudan.edu.cn", ["x_c0@163.com"], "tasdasdest", "hehehehehehe")
