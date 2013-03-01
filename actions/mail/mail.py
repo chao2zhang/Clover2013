@@ -2,12 +2,13 @@ def log(msg):
 	print(msg)
 
 class MailConfig:
-	POP_SERVER_NAME = "mail.fudan.edu.cn"
+	POP_SERVER_NAME = "pop3.163.com"
 	SMTP_SERVER_NAME = "mail.fudan.edu.cn"
 
 import poplib, smtplib
 from email import message_from_string, mime
 from email.utils import formatdate
+from email.Header import decode_header
 from getpass import *
 
 class PopClient:
@@ -20,9 +21,14 @@ class PopClient:
 		"""
 		index starts from 1
 		"""
-		raw = self.server.retr(index)[1]
+		raw = self.server.top(index, 0)[1]
 		msg = message_from_string('\n'.join(raw))
-		return msg
+		ret = {}
+		for item in ['From', 'To', 'Subject', 'Date']:
+			ret[item] = decode_header(msg[item])
+			for x in range(len(ret[item])):
+				ret[item][x] = ret[item][x][0]
+		return ret
 
 class SmtpClient:
 	def __init__(self, user, pwd, host = MailConfig.SMTP_SERVER_NAME):
@@ -44,5 +50,4 @@ class SmtpClient:
 		self.server.sendmail(fro, to, msg.as_string())
 
 if __name__ == '__main__':
-	pass
 	#smtp.send("10300240067@fudan.edu.cn", ["x_c0@163.com"], "tasdasdest", "hehehehehehe")
