@@ -60,8 +60,8 @@ except ImportError:
         parse_json = lambda s: simplejson.loads(s)
 
 class RenrenClient(object):
-	def __init__(self, session_key = None, api_key = RenrenConfig.APP_API_KEY, secret_key = RenrenConfig.APP_SECRET_KEY):
-		self.session_key = session_key
+	def __init__(self, access_token = None, api_key = RenrenConfig.APP_API_KEY, secret_key = RenrenConfig.APP_SECRET_KEY):
+		self.access_token = access_token
 		self.api_key = api_key
 		self.secret_key = secret_key
     
@@ -89,13 +89,15 @@ class RenrenClient(object):
 		}
 		response = urllib.urlopen("%s?%s" % (RenrenConfig.ACCESS_TOKEN_URI, urllib.urlencode(args))).read()
 		log(response)
-		access_token = parse_json(response)["access_token"]
+		self.access_token = parse_json(response)["access_token"]
+		"""
 		'''Obtain session key from the Resource Service.''' 
 		session_key_request_args = {"oauth_token": access_token}
 		response = urllib.urlopen("%s?%s" % (RenrenConfig.SESSION_KEY_URI, urllib.urlencode(session_key_request_args))).read()
 		log(response)
 		self.session_key = str(parse_json(response)["renren_token"]["session_key"])
-
+		"""
+	
 	def request(self, reqName, params = {}):
 		if reqName in RenrenConfig.SUPPORTED_REQUESTS.keys():
 				api = RenrenConfig.SUPPORTED_REQUESTS[reqName]
@@ -103,7 +105,7 @@ class RenrenClient(object):
 				params["api_key"] = self.api_key
 				params["call_id"] = str(int(time.time() * 1000))
 				params["format"] = "json"
-				params["session_key"] = self.session_key
+				params["access_token"] = self.access_token
 				params["v"] = '1.0'
 				sig = self.hash_params(params);
 				params["sig"] = sig
@@ -134,7 +136,8 @@ class RenrenClient(object):
 	
 	def setStatus(self, content):
 		ret = self.request('setStatus', {'status': content})['result']
-		if ret != '1': 
+		log(ret)
+		if str(ret) != '1': 
 			raise RenrenError(ret, 'setStatus failed')
 
 	def foward(self, content, forward_id, forward_owner):
@@ -145,12 +148,10 @@ class RenrenError(Exception):
 		Exception.__init__(self, message)
 		self.code = code
 		self.message = message
+		print message
 
 def log(msg):
 	print msg
 
 if __name__ == '__main__':
-		r = RenrenClient()
-		print r.getAuthUri()
-		r.auth(raw_input())
-			
+	pass

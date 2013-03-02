@@ -8,6 +8,7 @@ class MailConfig:
 import poplib, smtplib
 from email import message_from_string, mime
 from email.utils import formatdate
+from email.Header import decode_header
 from getpass import *
 
 class PopClient:
@@ -16,13 +17,24 @@ class PopClient:
 		self.server.user(user)
 		self.server.pass_(pwd)
 	
+	def count(self):
+		"""
+		return number of mails
+		"""
+		return self.server.stat()[0]
+
 	def fetch(self, index):
 		"""
 		index starts from 1
 		"""
-		raw = self.server.retr(index)[1]
+		raw = self.server.top(index, 0)[1]
 		msg = message_from_string('\n'.join(raw))
-		return msg
+		ret = {}
+		for item in ['From', 'To', 'Subject', 'Date']:
+			ret[item] = decode_header(msg[item])
+			for x in range(len(ret[item])):
+				ret[item][x] = ret[item][x][0]
+		return ret
 
 class SmtpClient:
 	def __init__(self, user, pwd, host = MailConfig.SMTP_SERVER_NAME):
