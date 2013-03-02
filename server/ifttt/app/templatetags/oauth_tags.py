@@ -12,4 +12,3 @@ def weibo_auth_uri():
 @register.simple_tag(name='renren_auth_uri')
 def renren_auth_uri():
     return Renren.auth_uri()
-

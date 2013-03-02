@@ -5,5 +5,19 @@ body{
 
 .container{
     margin: 0 auto;
-    max-width: 700px;
+    max-width: 740px;
 }
+
+.bind-button .span1 {
+    padding-left: 7px;
+    padding-top: 5px;
+}
+
+.unbind-button .span1 {
+    padding-top: 5px;
+}
+
+.trigger-grid, .action-grid {
+    background: #f3f3f3;
+}
+

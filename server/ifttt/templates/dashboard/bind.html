@@ -1,39 +1,74 @@
 {% extends "dashboard/base.html" %}
 
-{% block title %}Dashboard{% endblock %}
-
+{% load url from future %}
+{% load user_tags %}
 {% load oauth_tags %}
 {% load staticfiles %}
 
+{% block title %}
+    Bind
+{% endblock %}
+
+{% block navbar_js %}
+    $("li#link-bind").addClass("active");
+{% endblock %}
+
+{% block page_title %}
+Bind Accounts
+{% endblock %}
+
+{% block page_description %}
+You have {% count_accounts request.user %} of total {% total_accounts %} accounts activated.
+{% endblock %}
+
 {% block content %}
-{% if flash %}
-    {% for key, value in flash.items %}
-        <div class="flash_{{ key }}">
-            <p>{{ value }}</p>
-        </div>
-    {% endfor %}
-{% endif %}
 <div class="row">
     <div class="span1">
         <a href="{% renren_auth_uri %}">
-            <img src="{% static "img/renren.png" %}"/>
+            <img src="
+            {% if request.user.renrenaccount %}
+                {% static "img/renren.png" %}
+            {% else %}
+                {% static "img/renren_unbinded.png" %}
+            {% endif %}"
+            />
         </a>
     </div>
+
     <div class="span1">
         <a href="{% weibo_auth_uri %}">
-            <img src="{% static "img/weibo.png" %}"/>
+            <img src="
+            {% if request.user.weiboaccount %}
+                {% static "img/weibo.png" %}
+            {% else %}
+                {% static "img/weibo_unbinded.png" %}
+            {% endif %}"
+            />
+        </a>
+    </div>
+    <div class="span1">
+        <a href="{% url 'bind_fudan' %}">
+            <img src="
+            {% if request.user.fudanaccount %}
+                {% static "img/fudan.png" %}
+            {% else %}
+                {% static "img/fudan_unbinded.png" %}
+            {% endif %}"
+            />
         </a>
     </div>
     <div class="span1">
         <a href="">
-            <img src="{% static "img/fudan.jpg" %}"/>
+            <img src="
+            {% if request.user.fetionaccount %}
+                {% static "img/fetion.png" %}
+            {% else %}
+                {% static "img/fetion_unbinded.png" %}
+            {% endif %}
+            "/>
         </a>
     </div>
-    <div class="span1">
-        <a href="">
-            <img src="{% static "img/fetion.jpg" %}"/>
-        </a>
-    </div>
+
 </div>
 
 {% endblock %}

@@ -1,0 +1,72 @@
+{% extends "dashboard/base.html" %}
+
+{% load user_tags %}
+{% load oauth_tags %}
+{% load staticfiles %}
+
+{% block title %}
+    Bind
+{% endblock %}
+
+{% block navbar_js %}
+    $("li#link-new-task").addClass("active");
+{% endblock %}
+
+{% block page_title %}
+Create Task
+{% endblock %}
+
+{% block page_description %}
+You have {% count_accounts request.user %} of total {% total_accounts %} accounts activated.
+{% endblock %}
+
+{% block content %}
+    <div class="row-fluid">
+        <div class="span4 offset1 trigger-panel">
+            {% for trigger in triggers %}
+                {% trigger_grid trigger %}
+            {% endfor %}
+        </div>
+        <div class="span4 offset2 action-panel">
+            {% for action in actions %}
+                {% action_grid action %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <form id="task_new_form" class="form" method="post" action="">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {% for field in form.visible_fields %}
+            <div class="control-group">
+                {{ field.errors }}
+                {{ field.label_tag }} 
+                <div class="controls">
+                    {{ field }}
+                </div>
+            </div>
+        {% endfor %}
+        {% for field in form.hidden_fields %}
+            <div style="display:none;">{{ field }}</div>
+        {% endfor %}
+        <input class="btn btn-large btn-primary" type="submit" value="create" />
+    </form>
+
+    <script>
+    (function(){
+        $(".trigger-button").click(function() {
+            $(".trigger-button").removeClass("btn-primary");
+            $(this).addClass("btn-primary");
+            $("input#id_trigger_kind").val($(this).attr('id'));
+        });
+        $(".action-button").click(function() {
+            $(".action-button").removeClass("btn-primary");
+            $(this).addClass("btn-primary");
+            $("input#id_action_kind").val($(this).attr('id'));
+        });
+    }).call(this);
+    </script>
+
+
+
+{% endblock %}

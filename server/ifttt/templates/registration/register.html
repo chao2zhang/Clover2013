@@ -1,27 +1,28 @@
 {% extends "registration/base.html" %}
-{% block title %}Register{% endblock %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block navbar_js %}
+    $("li#link-register").addClass("active");
+{% endblock %}
 
 {% block content %}
 
-{% if flash %}
-    {% for key, value in flash.items %}
-        <div class="flash_{{ key }}">
-            <p>{{ value }}</p>
-        </div>
-    {% endfor %}
-{% endif %}
-
-<form method="post" action="/accounts/login/">
+<form class="form" method="post" action="/accounts/register/">
     {% csrf_token %}
     {{ form.non_field_errors }}
     {% for field in form %}
-        <div class="field_wrapper">
+        <div class="control-group">
             {{ field.errors }}
             {{ field.label_tag }} 
-            {{ field }}
+            <div class="controls">
+                {{ field }}
+            </div>
         </div>
     {% endfor %}
-    <input class="btn btn-large btn-success" type="submit" value="login" />
+    <input class="btn btn-large btn-success" type="submit" value="register" />
 </form>
 
 {% endblock %}

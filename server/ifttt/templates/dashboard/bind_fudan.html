@@ -1,16 +1,24 @@
-{% extends "registration/base.html" %}
+{% extends "dashboard/base.html" %}
+
+{% load user_tags %}
+{% load oauth_tags %}
+{% load staticfiles %}
 
 {% block title %}
-    Login
+    Bind Fudan Mail
 {% endblock %}
 
 {% block navbar_js %}
-    $("li#link-login").addClass("active");
+    $("li#link-bind").addClass("active");
+{% endblock %}
+
+{% block page_title %}
+Bind Fudan Mail Accounts
 {% endblock %}
 
 {% block content %}
 
-<form class="form" method="post" action="/accounts/login/">
+<form class="form" method="post" action="">
     {% csrf_token %}
     {{ form.non_field_errors }}
     {% for field in form %}
@@ -22,7 +30,7 @@
             </div>
         </div>
     {% endfor %}
-    <input class="btn btn-large btn-primary" type="submit" value="login" />
+    <input class="btn btn-large btn-success" type="submit" value="bind" />
 </form>
 
 {% endblock %}

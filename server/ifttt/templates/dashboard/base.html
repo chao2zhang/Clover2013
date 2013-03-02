@@ -5,25 +5,49 @@
     <script type="text/javascript" src="/static/js/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/static/css/bootstrap.min.css" type="text/css"/>
+    <link rel="stylesheet" href="/static/css/bootstrap-responsive.min.css" type="text/css"/>
     <link rel="stylesheet" href="/static/css/style.css" type="text/css"/>
     <title>{% block title %}连伊{% endblock %}</title>
 </head>
 
-<body>
+<body> 
     <div class="container">
         <div id="navigator">
-            {% block sidebar %}
+
             <ul class="nav nav-pills pull-right">
-                <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-                <li><a href="/tasks/new/">New Task</a></li>
-                <li><a href="/tasks/">Tasks</a></li>
-                <li><a href="{% url 'bind' %}">Bind</a></li>
-                <li><a href="{% url 'logout' %}">Logout</a></li>
+                <li id="link-dashboard"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                <li id="link-new-task"><a href="/tasks/new/">New Task</a></li>
+                <li id="link-tasks"><a href="/tasks/">Tasks</a></li>
+                <li id="link-bind"><a href="{% url 'bind' %}">Bind</a></li>
+                <li id="link-logout"><a href="{% url 'django.contrib.auth.views.logout' %}">Logout</a></li>
             </ul>
-            <h3 class="muted">连伊</h3>
+            <h2 class="text-info">连伊</h3>
+
+            <script>
+            {% block navbar_js %}
             {% endblock %}
+            </script>
         </div>
         
+        <hr/>
+
+        {% if flash %}
+            {% for key, value in flash.items %}
+                <div class="alert {{ key }}">
+                    <p>{{ value }}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div id="page-header" class="row-fluid clearfix">
+            <div id="page-title" class="span4">
+                <h4>{% block page_title %}{% endblock %}</h4>
+            </div>
+            <div id="page-title-description" class="span6 offset2">
+                <h4>{% block page_description %}{% endblock %}</h4>
+            </div>
+        </div>
+
         <hr/>
 
         <div id="content">
@@ -35,6 +59,7 @@
         <div class="footer">
             <p>© Company 2013</p>
         </div>
+
     </div>
 </body>
 

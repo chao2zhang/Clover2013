@@ -122,6 +122,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'django_extensions',
     'registration',
     'app',
 )
@@ -160,5 +161,9 @@ LOGIN_REDIRECT_URL = '/dashboard/'
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'djangoflash.context_processors.flash',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.request',
 )
 

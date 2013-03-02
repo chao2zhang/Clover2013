@@ -1,17 +1,18 @@
 {% extends "dashboard/base.html" %}
 
-{% block title %}Dashboard{% endblock %}
+{% block title %}
+    Dashboard
+{% endblock %}
+
+{% block navbar_js %}
+    $("li#link-dashboard").addClass("active");
+{% endblock %}
+
+{% block page_title %}
+Dashboard
+{% endblock %}
 
 {% block content %}
-
-{% if flash %}
-    {% for key, value in flash.items %}
-        <div class="flash_{{ key }}">
-            <p>{{ value }}</p>
-        </div>
-    {% endfor %}
-{% endif %}
-
 
 Hello, dashboard!
 

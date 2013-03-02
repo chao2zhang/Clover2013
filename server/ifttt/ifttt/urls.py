@@ -14,8 +14,8 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
-    url(r'^accounts/login/$', 'django.contrib.auth.views.login', name='login'),
-    url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', name='logout'),
+    url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
+    url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'next_page':'/'}),
     url(r'^accounts/register/$', 'registration.views.register', name='register'),
     url(r'^$', 'registration.views.home', name='home'),
 
@@ -23,4 +23,7 @@ urlpatterns = patterns('',
     url(r'^bind/$', 'app.views.bind', name='bind'),
     url(r'^bind/weibo/$', 'app.views.bind_weibo', name='bind_weibo'),
     url(r'^bind/renren/$', 'app.views.bind_renren', name='bind_renren'),
+    url(r'^bind/fudan/$', 'app.views.bind_fudan', name='bind_fudan'),
+    url(r'^bind/fetion/$', 'app.views.bind_fetion', name='bind_fetion'),
+    url(r'^tasks/new/$', 'app.views.new_task', name="new_task"),
 )

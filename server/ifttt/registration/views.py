@@ -11,7 +11,7 @@ def register(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            request.flash['message'] = 'Account created successfully'
+            request.flash['alert-success'] = 'Account created successfully'
             return redirect('login')
     return render_to_response(t, {'form': form}, context_instance=RequestContext(request))
 

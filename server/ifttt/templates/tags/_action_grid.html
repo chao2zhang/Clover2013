@@ -1,0 +1,4 @@
+{% load staticfiles %}
+<button id="{{ action.action_kind }}" class="btn btn-large btn-block action-button">
+    <img src={% static action.static %} height=20px width=20px />{{action.title}}
+</button>
