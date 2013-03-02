@@ -13,7 +13,7 @@ class FudanAccountForm(forms.Form):
         fa.password = self.cleaned_data['password']
         fa.save()
 
-class FetionAccountForm(forms.ModelForm):
+class FetionAccountForm(forms.Form):
     username = forms.CharField(max_length=20)
     password = forms.CharField(max_length=16, required=False, widget=widgets.PasswordInput)
     def save(self, user):

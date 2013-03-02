@@ -58,7 +58,7 @@ You have {% count_accounts request.user %} of total {% total_accounts %} account
         </a>
     </div>
     <div class="span1">
-        <a href="">
+        <a href="{% url 'bind_fetion' %}">
             <img src="
             {% if request.user.fetionaccount %}
                 {% static "img/fetion.png" %}
