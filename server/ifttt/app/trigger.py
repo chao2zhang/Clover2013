@@ -23,10 +23,16 @@ TRIGGER_DETAILS = map(_add2trigger, (
 
 class Trigger(models.Model):
     kind = models.CharField(max_length=12)
-    source = models.CharField(max_length=32)
-    content = models.CharField(max_length=140)
+    source = models.CharField(max_length=32, null=True)
+    content = models.CharField(max_length=140, null=True)
     updated_at = models.DateTimeField(auto_now=True)
-
+    def static(self):
+        return KIND2STATIC[self.kind.partition('-')[0]]
+    def clone(self):
+        trigger = Trigger.objects.get(pk=self.id)
+        trigger.id = None
+        trigger.save()
+        return trigger
 
 def active_triggers(user):
     triggers = filter(lambda detail: binded_account(user, kind=detail['kind'], require_password=detail['require_password']), TRIGGER_DETAILS)

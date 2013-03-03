@@ -1,0 +1,41 @@
+{% extends "dashboard/base.html" %}
+
+{% load url from future %}
+{% load user_tags %}
+{% load oauth_tags %}
+{% load staticfiles %}
+
+{% block title %}
+    {{task.description}}
+{% endblock %}
+
+{% block navbar_js %}
+{% endblock %}
+
+{% block page_title %}
+    <h4>{{task.description}}</h4>
+{% endblock %}
+
+{% block page_description %}
+    <div class="pull-right">
+        {% if task.user == request.user %}
+            <a href="{% url 'edit_task' id=task.id %}" id="edit_task" class="btn task-button"> Edit
+            </a>
+        {% endif %}
+        <a href="{% url 'clone_task' id=task.id %}" id="clone_task" class="btn task-button"> Clone
+        </a>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <img src="{% static task.trigger.static %}"/>
+    <img src="{% static task.action.static %}"/>
+    {{task.trigger.kind}}
+    {{task.trigger.source}}
+    {{task.trigger.content}}
+    {{task.action.kind}}
+    {{task.action.source}}
+    {{task.action.destination}}
+    {{task.action.content}}
+
+{% endblock %}

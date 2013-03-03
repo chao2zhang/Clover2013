@@ -26,4 +26,7 @@ urlpatterns = patterns('',
     url(r'^bind/fudan/$', 'app.views.bind_fudan', name='bind_fudan'),
     url(r'^bind/fetion/$', 'app.views.bind_fetion', name='bind_fetion'),
     url(r'^tasks/new/$', 'app.views.new_task', name="new_task"),
+    url(r'^tasks/(?P<id>\d+)/$', 'app.views.show_task', name="show_task"),
+    url(r'^tasks/(?P<id>\d+)/edit/$', 'app.views.edit_task', name="edit_task"),
+    url(r'^tasks/(?P<id>\d+)/clone$', 'app.views.clone_task', name="clone_task")
 )

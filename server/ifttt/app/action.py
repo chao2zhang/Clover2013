@@ -14,8 +14,6 @@ ACTION_KINDS = (
     "fetion-send2others",
 )
 
-
-
 def _add2action(action):
     action['kind'] = action['action_kind'].partition('-')[0]
     action['static'] = KIND2STATIC[action['kind']]
@@ -35,9 +33,16 @@ ACTION_DETAILS = map(_add2action, (
 
 class Action(models.Model):
     kind = models.CharField(max_length=12)
-    source = models.CharField(max_length=32)
-    destination = models.CharField(max_length=32)
+    source = models.CharField(max_length=32, null=True)
+    destination = models.CharField(max_length=32, null=True)
     content = models.CharField(max_length=140) #pre-formatted string
+    def static(self):
+        return KIND2STATIC[self.kind.partition('-')[0]]
+    def clone(self):
+        action = Action.objects.get(pk=self.id)
+        action.id = None
+        action.save()
+        return action
 
 class Pending(models.Model):
     action = models.ForeignKey(Action, related_name="pendings")

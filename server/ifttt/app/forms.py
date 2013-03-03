@@ -25,7 +25,7 @@ class FetionAccountForm(forms.Form):
 class TaskForm(forms.Form):
     trigger_kind = forms.CharField(max_length=12, widget=widgets.HiddenInput)
     trigger_source = forms.CharField(max_length=32, required=False)
-    trigger_content = forms.CharField(max_length=140, required=False)
+    trigger_tag = forms.CharField(max_length=140, required=False)
     
     action_kind = forms.CharField(max_length=12, widget=widgets.HiddenInput)
     action_source = forms.CharField(max_length=32, required=False)
@@ -37,10 +37,28 @@ class TaskForm(forms.Form):
 
     def save(self, user):
         d = self.cleaned_data
-        t = Trigger(kind=d['trigger_kind'], source=d['trigger_source'], content=d['trigger_content'])
-        t.save()
-        a = Action(kind=d['action_kind'], source=d['action_source'], destination=d['action_destination'], content=d['action_content'])
-        a.save()
-        tt = Task(user=user, description=d['description'], parent=d['parent'], trigger=t, action=a)
-        tt.save()
-        return True
+        trigger = Trigger(kind=d['trigger_kind'], source=d['trigger_source'], content=d['trigger_tag'])
+        trigger.save()
+        action = Action(kind=d['action_kind'], source=d['action_source'], destination=d['action_destination'], content=d['action_content'])
+        action.save()
+        task = Task(user=user, description=d['description'], parent=d['parent'], trigger=trigger, action=action)
+        task.save()
+        return task
+
+class TaskEditForm(TaskForm):
+    id = forms.IntegerField(min_value=0, widget=widgets.HiddenInput)
+    def save(self, user):
+        d = self.cleaned_data
+        task = Task.objects.get(pk=d['id'])
+        task.description=d.get('description')
+        task.save()
+        trigger = Trigger.objects.get(pk=task.trigger.id)
+        trigger.source=d.get('trigger_source')
+        trigger.content=d.get('trigger_content')
+        trigger.save()
+        action = Action.objects.get(pk=task.action.id)
+        action.source=d.get('action_source')
+        action.destination=d.get('action_destination')
+        action.content=d.get('action_content')
+        action.save()
+        return task

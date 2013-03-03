@@ -10,3 +10,18 @@ class Task(models.Model):
     parent = models.ForeignKey("self", null=True, blank=True, related_name="children")
     description = models.CharField(max_length=140)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def get_absolute_url(self):
+        return '/tasks/%i/' % self.id
+
+    def clone(self, user):
+        action = self.action.clone()
+        trigger = self.trigger.clone()
+        task = Task()
+        task.parent = self
+        task.action = action
+        task.trigger = trigger
+        task.description = self.description
+        task.user = user
+        task.save()
+        return task

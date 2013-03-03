@@ -1,0 +1,38 @@
+{% extends "dashboard/base.html" %}
+
+{% load user_tags %}
+{% load oauth_tags %}
+{% load staticfiles %}
+
+{% block title %}
+    Edit Task
+{% endblock %}
+
+{% block navbar_js %}
+{% endblock %}
+
+{% block page_title %}
+<h4>Edit Task</h4>
+{% endblock %}
+
+{% block content %}
+
+    <form id="task_edit_form" class="form" method="post" action="">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {% for field in form.visible_fields %}
+            <div class="control-group">
+                {{ field.errors }}
+                {{ field.label_tag }} 
+                <div class="controls">
+                    {{ field }}
+                </div>
+            </div>
+        {% endfor %}
+        {% for field in form.hidden_fields %}
+            <div style="display:none;">{{ field }}</div>
+        {% endfor %}
+        <input class="btn btn-large btn-primary" type="submit" value="edit" />
+    </form>
+
+{% endblock %}
