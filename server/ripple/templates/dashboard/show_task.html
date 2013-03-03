@@ -19,11 +19,10 @@
 {% block page_description %}
     <div class="pull-right">
         {% if task.user == request.user %}
-            <a href="{% url 'edit_task' id=task.id %}" id="edit_task" class="btn task-button"> Edit
-            </a>
+            <a href="{% url 'edit_task' id=task.id %}" id="edit_task" class="btn task-button"> Edit </a>
+            <a href="{% url 'delete_task' id=task.id %}" id="delete_task" class="btn task-button"> Delete </a>
         {% endif %}
-        <a href="{% url 'clone_task' id=task.id %}" id="clone_task" class="btn task-button"> Clone
-        </a>
+        <a href="{% url 'clone_task' id=task.id %}" id="clone_task" class="btn task-button"> Clone </a>
     </div>
 {% endblock %}
 

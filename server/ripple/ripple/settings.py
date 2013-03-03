@@ -1,4 +1,4 @@
-# Django settings for ifttt project.
+# Django settings for server project.
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG

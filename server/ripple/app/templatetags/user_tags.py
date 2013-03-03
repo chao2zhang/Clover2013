@@ -19,3 +19,7 @@ def trigger_grid(trigger):
 @register.inclusion_tag('tags/_action_grid.html')
 def action_grid(action):
     return {'action': action}
+
+@register.inclusion_tag('tags/_task_grid.html')
+def task_grid(task):
+    return {'task': task}

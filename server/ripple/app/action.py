@@ -5,9 +5,7 @@ from account import binded_account
 
 ACTION_KINDS = (
     "weibo-post",
-    "weibo-repost",
     "renren-post",
-    "renren-repost",
     "fudan-send2me",
     "fudan-send2others",
     "fetion-send2me",
@@ -21,9 +19,7 @@ def _add2action(action):
 
 ACTION_DETAILS = map(_add2action, (
     {'title': 'Post to Weibo', 'action_kind': 'weibo-post', 'require_password': False},
-    {'title': 'Repost to Weibo', 'action_kind': 'weibo-repost', 'require_password': False},
     {'title': 'Post to Renren', 'action_kind': 'renren-post', 'require_password': False},
-    {'title': 'Repost to Renren', 'action_kind': 'renren-repost', 'require_password': False},
     {'title': 'Send a Fudan mail to me', 'action_kind': 'fudan-send2me', 'require_password': False},
     {'title': 'Send a Fudan mail to others', 'action_kind': 'fudan-send2others', 'require_password': True},
     {'title': 'Send a Fetion message to me', 'action_kind': 'fetion-send2me', 'require_password': False},

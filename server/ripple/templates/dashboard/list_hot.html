@@ -1,0 +1,25 @@
+{% extends "dashboard/base.html" %}
+
+{% load user_tags %}
+{% load oauth_tags %}
+{% load staticfiles %}
+
+{% block title %}
+    Popular Task
+{% endblock %}
+
+{% block navbar_js %}
+    $("li#link-tasks").addClass("active");
+{% endblock %}
+
+{% block page_title %}
+<h4>Popular Tasks</h4>
+{% endblock %}
+
+{% block content %}
+
+    {% for task in tasks %}
+        {{task.action.static}} {{task.trigger.static}}
+    {% endfor %}
+
+{% endblock %}

@@ -16,8 +16,8 @@
 
             <ul class="nav nav-pills pull-right">
                 <li id="link-dashboard"><a href="{% url 'dashboard' %}">Dashboard</a></li>
-                <li id="link-new-task"><a href="/tasks/new/">New Task</a></li>
-                <li id="link-tasks"><a href="/tasks/">Tasks</a></li>
+                <li id="link-new-task"><a href="{% url 'new_task' %}">New Task</a></li>
+                <li id="link-tasks"><a href="{% url 'list_hot' %}">Tasks</a></li>
                 <li id="link-bind"><a href="{% url 'bind' %}">Bind</a></li>
                 <li id="link-logout"><a href="{% url 'django.contrib.auth.views.logout' %}">Logout</a></li>
             </ul>

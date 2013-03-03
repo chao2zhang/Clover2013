@@ -10,7 +10,8 @@ class Task(models.Model):
     parent = models.ForeignKey("self", null=True, blank=True, related_name="children")
     description = models.CharField(max_length=140)
     created_at = models.DateTimeField(auto_now_add=True)
-    count = models.IntegerField(default=0)
+    count = models.IntegerField(default=1)
+    public = models.BooleanField(default=False)
 
     def get_absolute_url(self):
         return '/tasks/%i/' % self.id
@@ -25,4 +26,8 @@ class Task(models.Model):
         task.description = self.description
         task.user = user
         task.save()
+        while task.parent:
+            task.count += 1
+            task.save()
+            task = task.parent
         return task

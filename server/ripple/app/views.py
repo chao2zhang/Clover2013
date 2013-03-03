@@ -2,6 +2,7 @@ from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_GET
+from django.contrib.auth.models import User
 from models import WeiboAccount, RenrenAccount, FetionAccount, FudanAccount
 from trigger import active_triggers, Trigger
 from action import active_actions, Action
@@ -72,10 +73,33 @@ def edit_task(request, id):
         }, context_instance=RequestContext(request))
 
 @login_required
+def delete_task(request, id):
+    task = get_object_or_404(Task, pk=id, user=request.user)
+    task.delete()
+    return redirect(dashboard)
+
+@login_required
 def clone_task(request, id):
     task = get_object_or_404(Task, pk=id)
     task = task.clone(request.user)
     return redirect(edit_task, id=task.id)
+
+@login_required
+def list(request, id):
+    t = 'dashboard/list.html'
+    user = get_object_or_404(User, pk=id)
+    tasks = user.tasks.all()
+    return render_to_response(t, {
+        'tasks': tasks,
+        }, context_instance=RequestContext(request))
+
+@login_required
+def list_hot(request):
+    t = 'dashboard/list_hot.html'
+    tasks = Task.objects.filter(public=True).order_by('-count')[:100]
+    return render_to_response(t, {
+        'tasks': tasks,
+        }, context_instance=RequestContext(request))
 
 @require_GET
 @login_required

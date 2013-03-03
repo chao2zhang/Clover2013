@@ -1,0 +1,24 @@
+{% load staticfiles %}
+<div class="span4 task-grid">
+    <a href="{{task.get_absolute_url}}" class="recipe recipe-shared recipe-small">
+        <span class="trigger">
+            <img class="trigger-icon" src="{% static task.trigger.static %}" >
+        </span>
+        <i class="icon-chevron-right"></i>
+        <span class="action">
+            <img class="action-icon" src="{% static task.action.static %}">
+        </span>
+    </a>
+    <div class="shared-recipe-in-list_details">
+        <div class="recipe-desc recipe-desc-compact">
+            <a href="{{task.get_absolute_url}}" class="recipe-desc_title">{{task.description}}</a>
+            <div class="recipe-desc_creation">
+                by
+                <a href="/people/linden" class="recipe-desc_author">{{task.user.username}}</a>
+            </div>
+            <div class="recipe-desc_usages">
+            used {{task.count}} times
+            </div>
+        </div>
+    </div>
+</div>

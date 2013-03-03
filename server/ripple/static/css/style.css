@@ -3,6 +3,10 @@ body{
     padding-bottom: 40px;
 }
 
+a, a:hover {
+    text-decoration: none;
+}
+
 .container{
     margin: 0 auto;
     max-width: 740px;
@@ -17,7 +21,8 @@ body{
     padding-top: 5px;
 }
 
-.trigger-grid, .action-grid {
+.trigger-grid, .action-grid, .task-grid {
     background: #f3f3f3;
+    padding: 5px;
 }
 

@@ -6,8 +6,8 @@ from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'ifttt.views.home', name='home'),
-    # url(r'^ifttt/', include('ifttt.foo.urls')),
+    # url(r'^$', 'server.views.home', name='home'),
+    # url(r'^server/', include('server.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
@@ -28,5 +28,8 @@ urlpatterns = patterns('',
     url(r'^tasks/new/$', 'app.views.new_task', name="new_task"),
     url(r'^tasks/(?P<id>\d+)/$', 'app.views.show_task', name="show_task"),
     url(r'^tasks/(?P<id>\d+)/edit/$', 'app.views.edit_task', name="edit_task"),
-    url(r'^tasks/(?P<id>\d+)/clone$', 'app.views.clone_task', name="clone_task")
+    url(r'^tasks/(?P<id>\d+)/clone/$', 'app.views.clone_task', name="clone_task"),
+    url(r'^tasks/(?P<id>\d+)/delete/$', 'app.views.delete_task', name="delete_task"),
+    url(r'^tasks/list_hot/$', 'app.views.list_hot', name="list_hot"),
+    url(r'^user/(?P<id>\d+)/$', 'app.views.list', name="list_task"),
 )
