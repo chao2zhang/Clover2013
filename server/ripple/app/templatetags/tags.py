@@ -12,6 +12,10 @@ def count_accounts(user):
 def total_accounts():
     return len(ACCOUNT_NAMES)
 
+@register.simple_tag(name='count_tasks')
+def count_tasks(user):
+    return user.tasks.count()
+
 @register.inclusion_tag('tags/_trigger_grid.html')
 def trigger_grid(trigger):
     return {'trigger': trigger}
