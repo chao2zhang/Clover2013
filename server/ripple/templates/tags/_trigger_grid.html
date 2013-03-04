@@ -1,4 +1,9 @@
 {% load staticfiles %}
-<button id="{{ trigger.trigger_kind }}" class="btn btn-large btn-block trigger-button">
-    <img src={% static trigger.static %} height=20px width=20px /> {{trigger.title}}
-</button>
+<div class="span4 trigger-grid">
+    <span class="trigger">
+        <img class="trigger-icon" src="{% static trigger.static %}" >
+    </span>
+    <div class="trigger-in-details">
+        <div class="trigger-title">{{trigger.title}}</div>
+    </div>
+</div>

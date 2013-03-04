@@ -23,6 +23,12 @@ a, a:hover {
 
 .trigger-grid, .action-grid, .task-grid {
     background: #f3f3f3;
+    margin-bottom: 5px;
     padding: 5px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    border-radius: 8px;
 }
 

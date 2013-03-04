@@ -1,8 +1,7 @@
 {% extends "dashboard/base.html" %}
 
 {% load url from future %}
-{% load user_tags %}
-{% load oauth_tags %}
+{% load tags %}
 {% load staticfiles %}
 
 {% block title %}
@@ -22,53 +21,11 @@
 {% endblock %}
 
 {% block content %}
-<div class="row">
-    <div class="span1">
-        <a href="{% renren_auth_uri %}">
-            <img src="
-            {% if request.user.renrenaccount %}
-                {% static "img/renren.png" %}
-            {% else %}
-                {% static "img/renren_unbinded.png" %}
-            {% endif %}"
-            />
-        </a>
-    </div>
 
-    <div class="span1">
-        <a href="{% weibo_auth_uri %}">
-            <img src="
-            {% if request.user.weiboaccount %}
-                {% static "img/weibo.png" %}
-            {% else %}
-                {% static "img/weibo_unbinded.png" %}
-            {% endif %}"
-            />
-        </a>
-    </div>
-    <div class="span1">
-        <a href="{% url 'bind_fudan' %}">
-            <img src="
-            {% if request.user.fudanaccount %}
-                {% static "img/fudan.png" %}
-            {% else %}
-                {% static "img/fudan_unbinded.png" %}
-            {% endif %}"
-            />
-        </a>
-    </div>
-    <div class="span1">
-        <a href="{% url 'bind_fetion' %}">
-            <img src="
-            {% if request.user.fetionaccount %}
-                {% static "img/fetion.png" %}
-            {% else %}
-                {% static "img/fetion_unbinded.png" %}
-            {% endif %}
-            "/>
-        </a>
-    </div>
-
-</div>
+{% for bind in binds %}
+    {% if forloop.first %}<div class="row-fluid">{% elif forloop.counter0|divisibleby:3 %}</div><div class="row-fluid">{% endif %}
+    {% bind_grid bind %}
+    {% if forloop.last %}</div>{% endif %}
+{% endfor %}
 
 {% endblock %}

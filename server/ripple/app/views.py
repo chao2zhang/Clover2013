@@ -3,21 +3,24 @@ from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_GET
 from django.contrib.auth.models import User
-from models import WeiboAccount, RenrenAccount, FetionAccount, FudanAccount
-from trigger import active_triggers, Trigger
-from action import active_actions, Action
-from task import Task
+from models import *
 from forms import TaskForm, TaskEditForm, FudanAccountForm, FetionAccountForm
 
 @login_required
 def dashboard(request):
     t = 'dashboard/dashboard.html'
-    return render_to_response(t, context_instance=RequestContext(request))
+    b = binds(request.user)
+    return render_to_response(t, {
+        'binds': b,
+        }, context_instance=RequestContext(request))
 
 @login_required
 def bind(request):
     t = 'dashboard/bind.html'
-    return render_to_response(t, context_instance=RequestContext(request))
+    b = binds(request.user)
+    return render_to_response(t, {
+        'binds': b,
+        }, context_instance=RequestContext(request))
 
 @login_required
 def new_task(request):
@@ -60,6 +63,7 @@ def edit_task(request, id):
         'description'       :task.description,
         'parent'            :task.parent.id if task.parent else None,
         'id'                :task.id,
+        'public'            :task.public,
     }
     form = TaskEditForm(initial=d)
     if request.POST:

@@ -167,3 +167,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
 )
 
+ABSOLUTE_URL_OVERRIDES = {
+    'auth.user': lambda u: "/users/%i/" % u.id,
+}
+

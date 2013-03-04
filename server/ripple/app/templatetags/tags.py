@@ -23,3 +23,11 @@ def action_grid(action):
 @register.inclusion_tag('tags/_task_grid.html')
 def task_grid(task):
     return {'task': task}
+
+@register.inclusion_tag('tags/_bind_grid.html')
+def bind_grid(bind):
+    return {'bind': bind}
+
+@register.filter(is_safe=True)
+def label_with_classes(value, arg):
+    return value.label_tag(attrs={'class': arg})

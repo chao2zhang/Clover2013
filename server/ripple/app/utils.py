@@ -11,3 +11,10 @@ KIND2STATIC = {
     'fetion': 'img/fetion.png',
     'fudan': 'img/fudan.png',
 }
+
+KIND2USTATIC = {
+    'weibo': 'img/weibo_unbinded.png',
+    'renren': 'img/renren_unbinded.png',
+    'fetion': 'img/fetion_unbinded.png',
+    'fudan': 'img/fudan_unbinded.png',
+}

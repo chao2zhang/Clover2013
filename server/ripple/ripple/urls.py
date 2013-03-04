@@ -31,5 +31,5 @@ urlpatterns = patterns('',
     url(r'^tasks/(?P<id>\d+)/clone/$', 'app.views.clone_task', name="clone_task"),
     url(r'^tasks/(?P<id>\d+)/delete/$', 'app.views.delete_task', name="delete_task"),
     url(r'^tasks/list_hot/$', 'app.views.list_hot', name="list_hot"),
-    url(r'^user/(?P<id>\d+)/$', 'app.views.list', name="list_task"),
+    url(r'^users/(?P<id>\d+)/$', 'app.views.list', name="list_task"),
 )
