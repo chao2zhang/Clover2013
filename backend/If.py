@@ -4,7 +4,8 @@ from DbUtils import *
 from triggers import *
 '''
 HANDLER(trigger_info, user_info)
-return pending_info(to be logged into db)
+return pending_info(to be logged into db) if ok
+else return None
 '''
 HANDLERS = {
 	'mail-new': FudanMailTrigger.test, 
@@ -21,7 +22,8 @@ def run():
 
 		pending_info = HANDLERS[trigger_info['kind']](trigger_info, user_info)
 		
-		insert('app_pending', pending_info)
+		if pending_info != None:
+			insert('app_pending', pending_info)
 		execute("update app_trigger set updated_at = datetime('now') where id = %s" % task_info['id'])
 	con.commit()	
 

@@ -1,8 +1,5 @@
 from helper import *
-import lib.mail, sqlite3
+from lib.mail import PopClient
 
 def test(trigger_info, user_info):
-	print trigger_info
-	print user_info
-	con = sqlite3.connect('sqlite.db')
-
+	pass	

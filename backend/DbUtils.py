@@ -5,6 +5,9 @@ APP_PENDING = ('id', 'action_id', 'user_id', 'content')
 APP_ACTION = ('id', 'kind', 'source', 'destination', 'content')
 AUTH_USER = ('id', 'user_name', 'first_name', 'last_name', 'email', 'password', 'is_staff', 'is_active', 'is_superuser', 'last_login', 'date_joined')
 APP_FUDANACCOUNT = ('id', 'username', 'password', 'user_id')
+APP_RENRENACCOUNT = ('id', 'access_token', 'user_id')
+APP_WEIBOACCOUNT = ('id', 'access_token', 'user_id')
+APP_FETIONACCOUNT = ('id', 'username', 'password', 'user_id')
 
 import sqlite3
 con = sqlite3.connect(DB_NAME)
