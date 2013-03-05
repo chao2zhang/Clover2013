@@ -17,9 +17,7 @@
 {% block content %}
     
     {% for task in tasks %}
-        {% if forloop.first %}<div class="row-fluid">{% elif forloop.counter0|divisibleby:3 %}</div><div class="row-fluid">{% endif %}
-        {% task_grid task %}
-        {% if forloop.last %}</div>{% endif %}
+        {% task_line task %}
     {% endfor %}
 
 {% endblock %}

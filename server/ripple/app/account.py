@@ -20,10 +20,10 @@ ACCOUNT_KINDS = (
 )
 
 ACCOUNT_DETAILS = (
-    {'title':'Renren', 'description':'OAuth 2.0 on Renren', 'kind':'renren'},
-    {'title':'Weibo', 'description':'OAuth 2.0 on Renren', 'kind':'weibo'},
-    {'title':'Fudan Mail', 'description':'If you set up your address, you can receive an email from system. If you set up your password, system can use your account to send a fudan mail to others', 'kind':'fudan'},
-    {'title':'Fetion', 'description':'If you set up your phone number, you can receive a fetion message from system. If you set up your password, system can use your fetion to send a message mail to others', 'kind':'fetion'},
+    {'title':'Renren', 'kind':'renren'},
+    {'title':'Weibo', 'kind':'weibo'},
+    {'title':'Fudan Mail', 'kind':'fudan'},
+    {'title':'Fetion', 'kind':'fetion'},
 )
 
 def binded_accounts(user):

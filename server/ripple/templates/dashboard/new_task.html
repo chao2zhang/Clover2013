@@ -71,14 +71,14 @@
 
     <script>
     (function(){
-        $(".trigger-button").click(function() {
-            $(".trigger-button").removeClass("btn-primary");
-            $(this).addClass("btn-primary");
+        $(".trigger-grid").click(function() {
+            $(".trigger-grid").removeClass("chosen");
+            $(this).addClass("chosen");
             $("input#id_trigger_kind").val($(this).attr('id'));
         });
-        $(".action-button").click(function() {
-            $(".action-button").removeClass("btn-primary");
-            $(this).addClass("btn-primary");
+        $(".action-grid").click(function() {
+            $(".action-grid").removeClass("chosen");
+            $(this).addClass("chosen");
             $("input#id_action_kind").val($(this).attr('id'));
         });
     }).call(this);

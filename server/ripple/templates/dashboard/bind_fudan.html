@@ -1,7 +1,7 @@
 {% extends "dashboard/base.html" %}
 
-{% load user_tags %}
-{% load oauth_tags %}
+{% load tags %}
+
 {% load staticfiles %}
 
 {% block title %}
@@ -17,6 +17,11 @@
 {% endblock %}
 
 {% block content %}
+
+<div class="text-info">
+    Filling your username enables system to send mails to you.
+    Filling your password enables system to use your account to send mails to others.
+</div>
 
 <form class="form" method="post" action="">
     {% csrf_token %}

@@ -10,8 +10,10 @@ from forms import TaskForm, TaskEditForm, FudanAccountForm, FetionAccountForm
 def dashboard(request):
     t = 'dashboard/dashboard.html'
     b = binds(request.user)
+    tasks = request.user.tasks.all()
     return render_to_response(t, {
         'binds': b,
+        'tasks': tasks,
         }, context_instance=RequestContext(request))
 
 @login_required
@@ -33,6 +35,7 @@ def new_task(request):
             request.flash['alert-success'] = 'Task created successfully'
             return redirect(task)
 
+    print form.errors
     return render_to_response(t, {
         'triggers'  :active_triggers(request.user),
         'actions'   :active_actions(request.user),
@@ -74,6 +77,7 @@ def edit_task(request, id):
             return redirect(task)
     return render_to_response(t, {
         'form': form,
+        'task': task,
         }, context_instance=RequestContext(request))
 
 @login_required

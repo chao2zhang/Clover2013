@@ -2,7 +2,7 @@ from django import forms
 from django.forms import widgets
 from models import *
 class FudanAccountForm(forms.Form):
-    username = forms.CharField(max_length=20)
+    username = forms.CharField(max_length=32)
     password = forms.CharField(max_length=16, required=False, widget=widgets.PasswordInput)
     def save(self, user):
         fa, created = FudanAccount.objects.get_or_create(user=user, username=self.cleaned_data['username'])
@@ -10,7 +10,7 @@ class FudanAccountForm(forms.Form):
         fa.save()
 
 class FetionAccountForm(forms.Form):
-    username = forms.CharField(max_length=20)
+    username = forms.CharField(max_length=32)
     password = forms.CharField(max_length=16, required=False, widget=widgets.PasswordInput)
     def save(self, user):
         fa, created = FetionAccount.objects.get_or_create(user=user, username=self.cleaned_data['username'])
@@ -19,18 +19,18 @@ class FetionAccountForm(forms.Form):
 
 
 class TaskForm(forms.Form):
-    trigger_kind = forms.CharField(max_length=12, widget=widgets.HiddenInput)
+    trigger_kind = forms.CharField(max_length=32, widget=widgets.HiddenInput)
     trigger_source = forms.CharField(max_length=32, widget=forms.TextInput(attrs={'placeholder': 'Source of Trigger'}), required=False)
     trigger_tag = forms.CharField(max_length=140, widget=forms.TextInput(attrs={'placeholder': 'Tag of Trigger'}), required=False)
     
-    action_kind = forms.CharField(max_length=12, widget=widgets.HiddenInput)
+    action_kind = forms.CharField(max_length=32, widget=widgets.HiddenInput)
     action_source = forms.CharField(max_length=32, widget=forms.TextInput(attrs={'placeholder': 'Source of Action'}), required=False)
     action_destination = forms.CharField(max_length=32, widget=forms.TextInput(attrs={'placeholder': 'Destination of Action'}), required=False)
     action_content = forms.CharField(max_length=140, widget=forms.TextInput(attrs={'placeholder': 'Content of Action'}))
 
     description = forms.CharField(max_length=140, widget=forms.TextInput(attrs={'placeholder': 'Description of Task'}))
     parent = forms.IntegerField(min_value=0, widget=widgets.HiddenInput, required=False)
-    public = forms.BooleanField(initial=False)
+    public = forms.BooleanField(initial=False, required=False)
 
     def save(self, user):
         d = self.cleaned_data
@@ -38,7 +38,7 @@ class TaskForm(forms.Form):
         trigger.save()
         action = Action(kind=d['action_kind'], source=d['action_source'], destination=d['action_destination'], content=d['action_content'])
         action.save()
-        task = Task(user=user, description=d['description'], parent=d['parent'], trigger=trigger, action=action, public=public)
+        task = Task(user=user, description=d['description'], parent=d['parent'], trigger=trigger, action=action, public=d['public'])
         task.save()
         return task
 

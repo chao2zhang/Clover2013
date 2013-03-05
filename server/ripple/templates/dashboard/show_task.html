@@ -27,14 +27,5 @@
 {% endblock %}
 
 {% block content %}
-    <img src="{% static task.trigger.static %}"/>
-    <img src="{% static task.action.static %}"/>
-    {{task.trigger.kind}}
-    {{task.trigger.source}}
-    {{task.trigger.content}}
-    {{task.action.kind}}
-    {{task.action.source}}
-    {{task.action.destination}}
-    {{task.action.content}}
-
+    {% trigger_action_line task %}
 {% endblock %}

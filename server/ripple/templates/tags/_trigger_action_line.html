@@ -1,0 +1,13 @@
+{% load staticfiles %}
+{% load tags %}
+<div class="row-fluid trigger-action-line">
+    <div id="{{task.trigger.kind}}" class="span6 trigger-grid">
+        <img class="trigger-icon pull-left" src="{% static task.trigger.static %}" >
+        <div class="trigger-title-large pull-left">{{task.trigger|trigger_title}}</div>
+    </div>
+
+    <div id="{{task.action.kind}}" class="span6 action-grid">
+        <img class="action-icon pull-left" src="{% static task.action.static %}" >
+        <div class="action-title-large pull-left">{{task.action|action_title}}</div>
+    </div>
+</div>

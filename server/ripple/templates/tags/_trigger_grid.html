@@ -1,9 +1,5 @@
 {% load staticfiles %}
-<div class="span4 trigger-grid">
-    <span class="trigger">
-        <img class="trigger-icon" src="{% static trigger.static %}" >
-    </span>
-    <div class="trigger-in-details">
-        <div class="trigger-title">{{trigger.title}}</div>
-    </div>
+<div id="{{trigger.trigger_kind}}" class="span4 trigger-grid cleafix">
+    <img class="trigger-icon pull-left" src="{% static trigger.static %}" >
+    <div class="trigger-title pull-left">{{trigger.title}}</div>
 </div>

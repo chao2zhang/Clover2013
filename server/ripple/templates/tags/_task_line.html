@@ -1,0 +1,23 @@
+{% load staticfiles %}
+{% load tags %}
+<div class="row-fluid task-line">
+    <div class="span12 clearfix">
+        <a href="{{task.get_absolute_url}}" class="pull-left clearfix">
+            <img class="trigger-icon pull-left" src="{% static task.trigger.static %}" >
+            <i class="icon-chevron-right pull-left middle-arrow"></i>
+            <img class="action-icon pull-left" src="{% static task.action.static %}" >
+        </a>
+
+        <div class="pull-left task-desc clearfix">
+            <div class="task-title">
+                <a href="{{task.get_absolute_url}}"><h4>{{task.description}}</h4></a>
+            </div>
+            <div class="task-creation">
+                by <a href="{{task.user.get_absolute_url}}" class="recipe-desc_author">{{task.user.username}}</a> on {{task.created_at}}
+            </div>
+            <div class="task-usage">
+                used {{task.count}} times
+            </div>
+        </div>
+    </div>
+</div>

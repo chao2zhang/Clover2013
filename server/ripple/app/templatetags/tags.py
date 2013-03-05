@@ -28,6 +28,14 @@ def action_grid(action):
 def task_grid(task):
     return {'task': task}
 
+@register.inclusion_tag('tags/_task_line.html')
+def task_line(task):
+    return {'task': task}
+
+@register.inclusion_tag('tags/_trigger_action_line.html')
+def trigger_action_line(task):
+    return {'task': task}
+
 @register.inclusion_tag('tags/_bind_grid.html')
 def bind_grid(bind):
     return {'bind': bind}
@@ -35,3 +43,19 @@ def bind_grid(bind):
 @register.filter(is_safe=True)
 def label_with_classes(value, arg):
     return value.label_tag(attrs={'class': arg})
+
+from app.action import ACTION_DETAILS
+from app.trigger import TRIGGER_DETAILS
+
+@register.filter
+def trigger_title(trigger):
+    print trigger.kind
+    for detail in TRIGGER_DETAILS:
+        if trigger.kind == detail['trigger_kind']:
+            return detail['title']
+
+@register.filter
+def action_title(action):
+    for detail in ACTION_DETAILS:
+        if action.kind == detail['action_kind']:
+            return detail['title']

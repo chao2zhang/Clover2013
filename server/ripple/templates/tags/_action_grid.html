@@ -1,9 +1,5 @@
 {% load staticfiles %}
-<div class="span4 action-grid">
-    <span class="action">
-        <img class="action-icon" src="{% static action.static %}" >
-    </span>
-    <div class="action-in-details">
-        <div class="action-title">{{action.title}}</div>
-    </div>
+<div id="{{action.action_kind}}" class="span4 action-grid">
+    <img class="action-icon pull-left" src="{% static action.static %}" >
+    <div class="action-title pull-left">{{action.title}}</div>
 </div>
