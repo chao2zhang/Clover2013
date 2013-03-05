@@ -1,11 +1,11 @@
 {% load staticfiles %}
-<div class="span4 task-grid">
+<div class="span4 task-grid clearfix">
     <a href="{{task.get_absolute_url}}" class="pull-left clearfix">
         <img class="trigger-icon pull-left" src="{% static task.trigger.static %}" >
         <i class="icon-chevron-right"></i>
         <img class="action-icon" src="{% static task.action.static %}">
     </a>
-    <div class="task-in-details pull-left">
+    <div class="task-in-details">
         <a href="{{task.get_absolute_url}}" class="task-title">{{task.description}}</a>
         <div class="task-creation">
             by <a href="{{task.user.get_absolute_url}}" class="recipe-desc_author">{{task.user.username}}</a> on {{task.created_at}}

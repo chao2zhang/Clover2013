@@ -12,11 +12,15 @@ a, a:hover {
     max-width: 740px;
 }
 
+.middle-arrow {
+    margin-top: 34px;
+}
+
 .trigger-grid div, .action-grid div {
     word-wrap: break-word;
 }
 
-.trigger-grid, .action-grid, .task-grid, .task-line {
+.trigger-grid, .action-grid, .task-grid, .task-line, .bind-grid {
     background: #f3f3f3;
     border-color: #f3f3f3;
     border-style: solid;
@@ -30,28 +34,38 @@ a, a:hover {
     border-radius: 8px;
 }
 
-.chosen {
+.action-grid.chosen, .trigger-grid.chosen {
     border-color: #7f7f7f;
     border-style: solid;
     border-width: 1px;
+}
+
+.task-line {
+    padding:15px;
 }
 
 .trigger-grid, .action-grid {
     cursor: pointer;
 }
 
-
-.middle-arrow {
-    margin-top: 34px;
-}
-
 .task-desc {
     margin-left: 10px;
 }
 
-.action-title, .trigger-title {
+.action-title, .trigger-title, .bind-title {
     margin: 5px;
     max-width: 130px;
+}
+
+.task-title {
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 500px;
+}
+
+.task-icons {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .action-title-large, .trigger-title-large {
