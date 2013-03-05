@@ -1,0 +1,13 @@
+body{
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+
+a, a:hover {
+    text-decoration: none;
+}
+
+.container{
+    margin: 0 auto;
+    max-width: 740px;
+}

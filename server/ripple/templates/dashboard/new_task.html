@@ -1,7 +1,6 @@
 {% extends "dashboard/base.html" %}
 
 {% load tags %}
-
 {% load staticfiles %}
 
 {% block title %}
@@ -13,11 +12,11 @@
 {% endblock %}
 
 {% block page_title %}
-<h4>Create a task</h4>
+<h3>Create a task</h3>
 {% endblock %}
 
 {% block content %}
-    <div class="trigger-panel">
+    <div id="trigger-panel">
         <div class="row-fluid">
             <div class="span12">
                 <h3>Choose a trigger</h3>
@@ -30,7 +29,7 @@
         {% endfor %}
     </div>
 
-    <div class="action-panel">
+    <div id="action-panel" style="display:none">
         <div class="row-fluid">
             <div class="span12">
                 <h3>Choose a action</h3>
@@ -43,31 +42,30 @@
         {% endfor %}
     </div>
 
-
-    <div class="form-panel">
+    <div id="form-panel" style="display:none">
         <div class="row-fluid">
             <div class="span12">
                 <h3>Extra information</h3>
             </div>
         </div>
-    </div>
-    <form id="task_new_form" class="form-horizontal" method="post" action="">
-        {% csrf_token %}
-        {{ form.non_field_errors }}
-        {% for field in form.visible_fields %}
-            <div class="control-group">
-                {{ field.errors }}
-                {{ field|label_with_classes:"control-label"}} 
-                <div class="controls">
-                    {{ field }}
+        <form id="task_new_form" class="form-horizontal" method="post" action="">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            {% for field in form.visible_fields %}
+                <div class="control-group">
+                    {{ field.errors }}
+                    {{ field|label_with_classes:"control-label"}} 
+                    <div class="controls">
+                        {{ field }}
+                    </div>
                 </div>
-            </div>
-        {% endfor %}
-        {% for field in form.hidden_fields %}
-            <div style="display:none;">{{ field }}</div>
-        {% endfor %}
-        <input class="btn btn-large btn-primary" type="submit" value="create" />
-    </form>
+            {% endfor %}
+            {% for field in form.hidden_fields %}
+                <div style="display:none;">{{ field }}</div>
+            {% endfor %}
+            <input class="btn btn-large btn-primary" type="submit" value="create" />
+        </form>
+    </div>
 
     <script>
     (function(){
@@ -75,11 +73,15 @@
             $(".trigger-grid").removeClass("chosen");
             $(this).addClass("chosen");
             $("input#id_trigger_kind").val($(this).attr('id'));
+            if ($("#action-panel").is(":hidden"))
+                $("#action-panel").slideDown();
         });
         $(".action-grid").click(function() {
             $(".action-grid").removeClass("chosen");
             $(this).addClass("chosen");
             $("input#id_action_kind").val($(this).attr('id'));
+            if ($("#form-panel").is(":hidden"))
+                $("#form-panel").slideDown();
         });
     }).call(this);
     </script>

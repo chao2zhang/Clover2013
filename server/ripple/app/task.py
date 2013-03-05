@@ -9,9 +9,9 @@ class Task(models.Model):
     action = models.OneToOneField(Action)
     parent = models.ForeignKey("self", null=True, blank=True, related_name="children")
     description = models.CharField(max_length=140)
+    public = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     count = models.IntegerField(default=1)
-    public = models.BooleanField(default=False)
 
     def get_absolute_url(self):
         return '/tasks/%i/' % self.id
@@ -19,15 +19,11 @@ class Task(models.Model):
     def clone(self, user):
         action = self.action.clone()
         trigger = self.trigger.clone()
-        task = Task()
-        task.parent = self
-        task.action = action
-        task.trigger = trigger
-        task.description = self.description
-        task.user = user
+        task = Task(user=user, trigger=trigger, action=action, parent=self, description=self.description, public=self.public)
         task.save()
-        while task.parent:
-            task.count += 1
-            task.save()
-            task = task.parent
+        parent = task.parent
+        while parent:
+            parent.count += 1
+            parent.save()
+            parent = parent.parent
         return task

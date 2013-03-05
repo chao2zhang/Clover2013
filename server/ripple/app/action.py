@@ -31,7 +31,7 @@ class Action(models.Model):
     kind = models.CharField(max_length=12)
     source = models.CharField(max_length=32, null=True)
     destination = models.CharField(max_length=32, null=True)
-    content = models.CharField(max_length=140) #pre-formatted string
+    content = models.CharField(max_length=600) #pre-formatted string
     def static(self):
         return KIND2STATIC[self.kind.partition('-')[0]]
     def clone(self):
@@ -43,7 +43,7 @@ class Action(models.Model):
 class Pending(models.Model):
     action = models.ForeignKey(Action, related_name="pendings")
     done = models.BooleanField()
-    content = models.CharField(max_length=140) #formatted string
+    content = models.CharField(max_length=600) #formatted string
 
 def active_actions(user):
     actions = filter(lambda detail: binded_account(user, kind=detail['kind'], require_password=detail['require_password']), ACTION_DETAILS)

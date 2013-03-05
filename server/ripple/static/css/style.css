@@ -7,6 +7,10 @@ a, a:hover {
     text-decoration: none;
 }
 
+#form-panel input[type="text"], #form-panel textarea {
+    width: 500px;
+}
+
 .container{
     margin: 0 auto;
     max-width: 740px;
