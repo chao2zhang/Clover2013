@@ -5,7 +5,7 @@
 {% load staticfiles %}
 
 {% block title %}
-    Bind
+    绑定信号
 {% endblock %}
 
 {% block navbar_js %}
@@ -13,11 +13,11 @@
 {% endblock %}
 
 {% block page_title %}
-    <h3>Bind Accounts</h3>
+    <h3>绑定信号</h3>
 {% endblock %}
 
 {% block page_description %}
-    <h4>You have {% count_accounts request.user %} of total {% total_accounts %} accounts activated.</h4>
+    <h4 class="pull-right">你在 {% total_accounts %} 个信号里激活了 {% count_accounts request.user %} 个</h4>
 {% endblock %}
 
 {% block content %}

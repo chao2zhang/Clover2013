@@ -16,8 +16,22 @@ a, a:hover {
     max-width: 740px;
 }
 
-.middle-arrow {
-    margin-top: 34px;
+.right-triangle {
+    width: 0px;
+    height: 0px;
+    border-style: solid;
+    border-width: 20px 0 20px 20px;
+    border-color: transparent transparent transparent #666;
+}
+
+.task-line .right-triangle {
+    float: left;
+    margin: 20px 5px;
+}
+
+.trigger-action-line .right-triangle {
+    float: left;
+    margin: 23px 0px 23px 20px;
 }
 
 .trigger-grid div, .action-grid div {
@@ -57,8 +71,16 @@ a, a:hover {
 }
 
 .action-title, .trigger-title, .bind-title {
-    margin: 5px;
+    margin: 15px 5px;
     max-width: 130px;
+    display: table;
+    height: 48px;
+}
+
+.action-title h4, .trigger-title h4, .bind-title h4 {
+    display: table-cell; 
+    vertical-align: middle; 
+    text-align: center; 
 }
 
 .task-title {
@@ -73,6 +95,10 @@ a, a:hover {
 }
 
 .action-title-large, .trigger-title-large {
-    margin: 5px;
+    margin: 20px 5px;
     max-width: 270px;
+}
+
+#page-title-description {
+    margin-top: 12px;
 }

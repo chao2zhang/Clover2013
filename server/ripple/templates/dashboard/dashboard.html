@@ -4,7 +4,7 @@
 {% load tags %}
 
 {% block title %}
-    Dashboard
+    概览
 {% endblock %}
 
 {% block navbar_js %}
@@ -12,17 +12,17 @@
 {% endblock %}
 
 {% block page_title %}
-    <h3>Dashboard</h3>
+    <h3>概览</h3>
 {% endblock %}
 
 {% block content %}
 
-<div class="row-fluid">
+<div class="row-fluid clearfix">
     <div id="bind-title" class="span4">
-        <h4>Accounts</h4>
+        <h4>信号</h4>
     </div>
     <div id="bind-description" class="span6 offset2">
-        <h4>You have {% count_accounts request.user %} of total {% total_accounts %} accounts activated.</h4>
+        <h4 class="">你在 {% total_accounts %} 个信号里激活了 {% count_accounts request.user %} 个</h4>
     </div>
 </div>
 

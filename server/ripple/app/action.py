@@ -1,3 +1,4 @@
+#coding:utf8
 from django.db import models
 from django.contrib.auth.models import User
 from utils import KIND2STATIC
@@ -18,12 +19,12 @@ def _add2action(action):
     return action
 
 ACTION_DETAILS = map(_add2action, (
-    {'title': 'Post to Weibo', 'action_kind': 'weibo-post', 'require_password': False},
-    {'title': 'Post to Renren', 'action_kind': 'renren-post', 'require_password': False},
-    {'title': 'Send a Fudan mail to me', 'action_kind': 'fudan-send2me', 'require_password': False},
-    {'title': 'Send a Fudan mail to others', 'action_kind': 'fudan-send2others', 'require_password': True},
-    {'title': 'Send a Fetion message to me', 'action_kind': 'fetion-send2me', 'require_password': False},
-    {'title': 'Send a Fetion message to others', 'action_kind': 'fetion-send2others', 'require_password': True},
+    {'title': u'发表一条微博', 'action_kind': 'weibo-post', 'require_password': False},
+    {'title': u'发表一条人人状态', 'action_kind': 'renren-post', 'require_password': False},
+    {'title': u'发送复旦邮件给我', 'action_kind': 'fudan-send2me', 'require_password': False},
+    {'title': u'发送复旦邮件给别人', 'action_kind': 'fudan-send2others', 'require_password': True},
+    {'title': u'发送飞信给我', 'action_kind': 'fetion-send2me', 'require_password': False},
+    {'title': u'发送飞信给别人', 'action_kind': 'fetion-send2others', 'require_password': True},
     )
 )
 

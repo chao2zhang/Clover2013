@@ -1,3 +1,4 @@
+#coding:utf8
 from django.db import models
 from django.contrib.auth.models import User
 from account import binded_account
@@ -15,9 +16,9 @@ def _add2trigger(trigger):
     return trigger
 
 TRIGGER_DETAILS = map(_add2trigger, (
-    {'title': 'A new post from Weibo', 'trigger_kind': 'weibo-new', 'require_password': False},
-    {'title': 'A new post from Renren', 'trigger_kind': 'renren-new', 'require_password': False},
-    {'title': 'A new mail from FudanMail', 'trigger_kind': 'fudan-new', 'require_password': True},
+    {'title': u'当收到一条微博', 'trigger_kind': 'weibo-new', 'require_password': False},
+    {'title': u'当收到一条人人状态', 'trigger_kind': 'renren-new', 'require_password': False},
+    {'title': u'当收到一封复旦邮件', 'trigger_kind': 'fudan-new', 'require_password': True},
     )
 )
 

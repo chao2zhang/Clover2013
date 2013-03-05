@@ -28,4 +28,11 @@
 
 {% block content %}
     {% trigger_action_line task %}
+
+    <div class="task-creation">
+         <a href="{{task.user.get_absolute_url}}" class="recipe-desc_author">{{task.user.username}}</a> 在 {{task.created_at}} 创建
+    </div>
+    <div class="task-usage">
+        有 {{task.count}} 个子波
+    </div>
 {% endblock %}

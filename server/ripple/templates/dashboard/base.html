@@ -14,11 +14,11 @@
     <div class="container">
         <div id="navigator">
             <ul class="nav nav-pills pull-right">
-                <li id="link-dashboard"><a href="{% url 'dashboard' %}">Dashboard</a></li>
-                <li id="link-new-task"><a href="{% url 'new_task' %}">New Task</a></li>
-                <li id="link-tasks"><a href="{% url 'list_hot' %}">Tasks</a></li>
-                <li id="link-bind"><a href="{% url 'bind' %}">Bind</a></li>
-                <li id="link-logout"><a href="{% url 'django.contrib.auth.views.logout' %}">Logout</a></li>
+                <li id="link-dashboard"><a href="{% url 'dashboard' %}">概览</a></li>
+                <li id="link-new-task"><a href="{% url 'new_task' %}">新涟漪</a></li>
+                <li id="link-tasks"><a href="{% url 'list_hot' %}">热门涟漪</a></li>
+                <li id="link-bind"><a href="{% url 'bind' %}">我的信号</a></li>
+                <li id="link-logout"><a href="{% url 'django.contrib.auth.views.logout' %}">登出</a></li>
             </ul>
             <h2 class="text-info">连伊</h3>
 
@@ -46,8 +46,6 @@
                 {% block page_description %}{% endblock %}
             </div>
         </div>
-
-        <hr/>
 
         <div id="content">
             {% block content %}{% endblock %}

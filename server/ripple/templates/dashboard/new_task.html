@@ -4,7 +4,7 @@
 {% load staticfiles %}
 
 {% block title %}
-    Create Task
+    新涟漪
 {% endblock %}
 
 {% block navbar_js %}
@@ -12,14 +12,14 @@
 {% endblock %}
 
 {% block page_title %}
-<h3>Create a task</h3>
+<h3>新涟漪</h3>
 {% endblock %}
 
 {% block content %}
     <div id="trigger-panel">
         <div class="row-fluid">
             <div class="span12">
-                <h3>Choose a trigger</h3>
+                <h3>选择信号</h3>
             </div>
         </div>
         {% for trigger in triggers %}
@@ -32,7 +32,7 @@
     <div id="action-panel" style="display:none">
         <div class="row-fluid">
             <div class="span12">
-                <h3>Choose a action</h3>
+                <h3>选择行动</h3>
             </div>
         </div>
         {% for action in actions %}
@@ -83,6 +83,7 @@
             if ($("#form-panel").is(":hidden"))
                 $("#form-panel").slideDown();
         });
+        $("#id_action_content").tooltip({'title':'title'});
     }).call(this);
     </script>
 
