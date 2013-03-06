@@ -1,6 +1,7 @@
 body{
     padding-top: 20px;
     padding-bottom: 40px;
+    background: url('/static/img/background.jpg') repeat-x #f7f5e9;
 }
 
 a, a:hover {

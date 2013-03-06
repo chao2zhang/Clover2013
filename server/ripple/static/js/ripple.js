@@ -29,11 +29,18 @@ $(document).ready(function(){
                 $(this).removeAttr("placeholder");
             }
         },
-        updateAddOn: function(element) {
-            if (element) {
-
+        updateAddOn: function(text) {
+            if (text) {
+                if ($(this).prev().hasClass("hide")) {
+                    $(this).prev().removeClass("hide");
+                    $(this).width($(this).width() - 27);
+                }
+                $(this).prev().text(text);
             } else {
-                $(this).
+                if (!$(this).prev().hasClass("hide")) {
+                    $(this).prev().addClass("hide");
+                    $(this).width($(this).width() + 27);
+                }
             }
         }
     });
