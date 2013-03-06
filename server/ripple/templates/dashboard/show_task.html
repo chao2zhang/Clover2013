@@ -18,11 +18,11 @@
 
 {% block page_description %}
     <div class="pull-right">
+        <a href="{% url 'clone_task' id=task.id %}" id="clone_task" class="btn btn-success task-button">复制</a>
         {% if task.user == request.user %}
-            <a href="{% url 'edit_task' id=task.id %}" id="edit_task" class="btn task-button"> Edit </a>
-            <a href="{% url 'delete_task' id=task.id %}" id="delete_task" class="btn task-button"> Delete </a>
+            <a href="{% url 'edit_task' id=task.id %}" id="edit_task" class="btn btn-primary task-button">编辑</a>
+            <a href="{% url 'delete_task' id=task.id %}" id="delete_task" class="btn btn-danger task-button">删除</a>
         {% endif %}
-        <a href="{% url 'clone_task' id=task.id %}" id="clone_task" class="btn task-button"> Clone </a>
     </div>
 {% endblock %}
 
@@ -33,6 +33,6 @@
          <a href="{{task.user.get_absolute_url}}" class="recipe-desc_author">{{task.user.username}}</a> 在 {{task.created_at}} 创建
     </div>
     <div class="task-usage">
-        有 {{task.count}} 个子波
+        有 {{task.count}} 个子涟漪
     </div>
 {% endblock %}

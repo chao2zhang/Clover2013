@@ -22,22 +22,24 @@
         <h4>信号</h4>
     </div>
     <div id="bind-description" class="span6 offset2">
-        <h4 class="">你在 {% total_accounts %} 个信号里激活了 {% count_accounts request.user %} 个</h4>
+        <h4 class="text-right">你在 {% total_accounts %} 个信号里激活了 {% count_accounts request.user %} 个</h4>
     </div>
 </div>
 
 <div class="row-fluid">
     {% for bind in binds %}
-        <img src="{% static bind.static %}" class="span1"/>
+        {% if forloop.first %}<div class="row-fluid">{% elif forloop.counter0|divisibleby:12 %}</div><div class="row-fluid">{% endif %}
+        {% bind_item bind %}
+        {% if forloop.last %}</div>{% endif %}
     {% endfor %}
 </div>
 
 <div class="row-fluid">
     <div id="task-title" class="span4">
-        <h4>Tasks</h4>
+        <h4>涟漪</h4>
     </div>
     <div id="task-description" class="span6 offset2">
-        <h4>You have {% count_tasks request.user %} tasks.</h4>
+        <h4 class="text-right">你有 {% count_tasks request.user %} 个涟漪</h4>
     </div>
 </div>
 

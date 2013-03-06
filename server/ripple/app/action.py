@@ -1,24 +1,15 @@
-#coding:utf8
+# -*- coding: utf-8 -*-
 from django.db import models
 from django.contrib.auth.models import User
-from utils import KIND2STATIC
+from utils import static_with_kind
 from account import binded_account
 
-ACTION_KINDS = (
-    "weibo-post",
-    "renren-post",
-    "fudan-send2me",
-    "fudan-send2others",
-    "fetion-send2me",
-    "fetion-send2others",
-)
-
-def _add2action(action):
+def proc_action(action):
     action['kind'] = action['action_kind'].partition('-')[0]
-    action['static'] = KIND2STATIC[action['kind']]
+    action['static'] = static_with_kind(action['kind'])
     return action
 
-ACTION_DETAILS = map(_add2action, (
+ACTION_DETAILS = map(proc_action, (
     {'title': u'发表一条微博', 'action_kind': 'weibo-post', 'require_password': False},
     {'title': u'发表一条人人状态', 'action_kind': 'renren-post', 'require_password': False},
     {'title': u'发送复旦邮件给我', 'action_kind': 'fudan-send2me', 'require_password': False},
@@ -34,7 +25,7 @@ class Action(models.Model):
     destination = models.CharField(max_length=32, null=True)
     content = models.CharField(max_length=600) #pre-formatted string
     def static(self):
-        return KIND2STATIC[self.kind.partition('-')[0]]
+        return static_with_kind(self.kind.partition('-')[0])
     def clone(self):
         action = Action.objects.get(pk=self.id)
         action.id = None

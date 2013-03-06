@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django import template
-from app.account import binded_accounts, ACCOUNT_NAMES
+from app.account import binded_accounts, ACCOUNT_NAMES, UNAUTHENTICATED_ACCOUNT_NAMES
 
 register = template.Library()
 
@@ -10,7 +10,7 @@ def count_accounts(user):
 
 @register.simple_tag(name='total_accounts') 
 def total_accounts():
-    return len(ACCOUNT_NAMES)
+    return len(ACCOUNT_NAMES + UNAUTHENTICATED_ACCOUNT_NAMES)
 
 @register.simple_tag(name='count_tasks')
 def count_tasks(user):
@@ -38,6 +38,10 @@ def trigger_action_line(task):
 
 @register.inclusion_tag('tags/_bind_grid.html')
 def bind_grid(bind):
+    return {'bind': bind}
+
+@register.inclusion_tag('tags/_bind_item.html')
+def bind_item(bind):
     return {'bind': bind}
 
 @register.filter(is_safe=True)

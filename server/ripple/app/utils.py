@@ -1,20 +1,8 @@
-KIND2ACCOUNT = {
-    'weibo': 'WeiboAccount',
-    'renren': 'RenrenAccount',
-    'fetion': 'FetionAccount',
-    'fudan': 'FudanAccount',
-    }
+def account_with_kind(kind):
+    return '%sAccount' % kind.capitalize()
 
-KIND2STATIC = {
-    'weibo': 'img/weibo.png',
-    'renren': 'img/renren.png',
-    'fetion': 'img/fetion.png',
-    'fudan': 'img/fudan.png',
-}
+def static_with_kind(kind):
+    return 'img/%s.png' % kind
 
-KIND2USTATIC = {
-    'weibo': 'img/weibo_unbinded.png',
-    'renren': 'img/renren_unbinded.png',
-    'fetion': 'img/fetion_unbinded.png',
-    'fudan': 'img/fudan_unbinded.png',
-}
+def static_unbinded_with_kind(kind):
+    return 'img/%s_unbinded.png' % kind

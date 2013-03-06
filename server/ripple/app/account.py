@@ -1,10 +1,10 @@
-#coding:utf8
+# -*- coding: utf-8 -*-
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from oauth.weibo import *
 from oauth.renren import *
-from utils import KIND2ACCOUNT, KIND2USTATIC, KIND2STATIC
+from utils import account_with_kind, static_unbinded_with_kind, static_with_kind
 
 ACCOUNT_NAMES = (
     "WeiboAccount",
@@ -13,37 +13,42 @@ ACCOUNT_NAMES = (
     "FetionAccount",
 )
 
-ACCOUNT_KINDS = (
-    "weibo",
-    "renren",
-    "fudan",
-    "fetion",
+UNAUTHENTICATED_ACCOUNT_NAMES = (
+    "WeatherAccount",
+    "StockAccount",
 )
 
 ACCOUNT_DETAILS = (
-    {'title':'Renren', 'kind':'renren'},
-    {'title':'Weibo', 'kind':'weibo'},
-    {'title':'Fudan Mail', 'kind':'fudan'},
-    {'title':'Fetion', 'kind':'fetion'},
+    {'title':u'人人网', 'kind':'renren'},
+    {'title':u'新浪微博', 'kind':'weibo'},
+    {'title':u'复旦邮箱', 'kind':'fudan'},
+    {'title':u'飞信', 'kind':'fetion'},
+)
+
+UNAUTHENTICATED_ACCOUNT_DETAILS = (
+    {'title':u'天气', 'kind':'weather'},
+    {'title':u'股票', 'kind':'stock'},
 )
 
 def binded_accounts(user):
-    return filter(lambda name: hasattr(user, name.lower()), ACCOUNT_NAMES)
+    return filter(lambda name: hasattr(user, name.lower()), ACCOUNT_NAMES) + UNAUTHENTICATED_ACCOUNT_NAMES
 
-def binded_account(user, kind=None, name=None, require_password=False):
-    if kind:
-        name = KIND2ACCOUNT[kind]
+def binded_account(user, kind, require_password=False):
+    name = account_with_kind(kind)
+    if name in UNAUTHENTICATED_ACCOUNT_NAMES: return True
     name = name.lower()
-    if name:
-        return hasattr(user, name) and getattr(user, name).password if require_password else hasattr(user, name)
-    return False
+    return hasattr(user, name) and getattr(user, name).password if require_password else hasattr(user, name)
 
 def binds(user):
-    details = list(ACCOUNT_DETAILS)
-    for a in details:
-        a['account'] = KIND2ACCOUNT[a['kind']]
-        a['static'] = KIND2STATIC[a['kind']] if binded_account(user, a['kind']) else KIND2USTATIC[a['kind']]
-        a['url'] = eval(a['account']).url()
+    details = []
+    for d in ACCOUNT_DETAILS:
+        d['account'] = account_with_kind(d['kind'])
+        d['static'] = static_with_kind(d['kind']) if binded_account(user, d['kind']) else static_unbinded_with_kind(d['kind'])
+        d['url'] = eval(d['account']).url()
+        details.append(d)
+    for d in UNAUTHENTICATED_ACCOUNT_DETAILS:
+        d['static'] = static_with_kind(d['kind'])
+        details.append(d)
     return details
 
 class WeiboAccount(models.Model):
