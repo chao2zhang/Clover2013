@@ -68,7 +68,8 @@ STATICFILES_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     '/Users/chaozhang/Development/clover/server/ripple/static',
-	'/home/xc/Desktop/Clover2013/server/ripple/static',
+    '/home/xc/Desktop/Clover2013/server/ripple/static',
+    '/Users/arapat/Workspace/Clover2013/server/ripple/static',
 )
 
 # List of finder classes that know how to find static files in
