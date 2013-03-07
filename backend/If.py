@@ -4,11 +4,12 @@ from DbUtils import *
 from triggers import *
 '''
 HANDLER(trigger_info, user_info)
-return pending_info(to be logged into db) if ok
-else return None
+return list of content should be logged into table app_pending
+each item in the list generate a app_pending entry 
+return [] when fail
 '''
 HANDLERS = {
-	'mail-new': FudanMailTrigger.test, 
+	'mail-new': MailTrigger.testFudan, 
 	'weibo-new': WeiboTrigger.test, 
 	'renren-new': RenrenTrigger.test
 	}
@@ -20,9 +21,11 @@ def run():
 		trigger_info = fetchById('app_trigger', task_info['trigger_id'])
 		action_info = fetchById('app_action', task_info['action_id'])
 
-		pending_info = HANDLERS[trigger_info['kind']](trigger_info, user_info)
+		pending_info = {'user_id': task_info['user_id'], 'action_id': task_info['action_id']}
+		content = HANDLERS[trigger_info['kind']](trigger_info, user_info)
 		
-		if pending_info != None:
+		for c in content:
+			pending_info['content'] = c
 			insert('app_pending', pending_info)
 		execute("update app_trigger set updated_at = datetime('now') where id = %s" % task_info['id'])
 	con.commit()	
