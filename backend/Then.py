@@ -16,10 +16,11 @@ HANDLERS = {
 def run():
 	for pending in execute('select * from app_pending'):
 		pending_info = dict(zip(APP_PENDING, pending))	
+		print pending_info['content']
 		action_info = fetchById('app_action', pending_info['action_id'])	
 
 		if HANDLERS[action_info['kind']](pending_info, action_info):
-			execute('delete from app_pending where id=' + pending_info['id'])
+			execute('delete from app_pending where id=' + str(pending_info['id']))
 	con.commit()
 
 if __name__ == '__main__':

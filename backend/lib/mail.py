@@ -12,7 +12,6 @@ import poplib, smtplib
 from email import message_from_string, mime
 from email.utils import *
 from email.Header import decode_header
-from time import mktime
 
 class PopClient:
 	def __init__(self, user, pwd, host = MailConfig.POP_FUDAN):
@@ -33,12 +32,14 @@ class PopClient:
 		raw = self.server.top(index, 0)[1]
 		msg = message_from_string('\n'.join(raw))
 		ret = {}
-		for item in ['From', 'Subject', 'Date']:
+		for item in ['From', 'Date']:
 			ret[item] = decode_header(msg[item])
 			for x in range(len(ret[item])):
 				ret[item][x] = ret[item][x][0]
-		ret['Date'] = mktime(parsedate(ret['Date'][0]))
-		ret['Subject'] = ret['Subject'][0]
+		tmp = decode_header(msg['Subject'])
+		if tmp[0][1]:
+			ret['Subject'] = tmp[0][0].decode(tmp[0][1])
+		ret['Date'] = mktime_tz(parsedate_tz(ret['Date'][0]))
 		return ret
 
 class SmtpClient:
@@ -56,7 +57,7 @@ class SmtpClient:
 		msg['To'] = ', '.join(to)
 		msg['Subject'] = subject 
 		msg['Date'] = formatdate(localtime=True) 
-		msg.attach(mime.Text.MIMEText(content))
+		msg.attach(mime.Text.MIMEText(content.encode('utf-8')))
 		
 		self.server.sendmail(fro, to, msg.as_string())
 

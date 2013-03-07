@@ -7,7 +7,7 @@ def post(pending_info, action_info):
 	print action_info
 	print '-' * 50
 	try:
-		user_info, acc_info = getInfo(pending_info['user_info'], 'app_weiboaccount')
+		user_info, acc_info = getInfo(pending_info['action_id'], 'app_weiboaccount')
 
 		weibo = Weibo(acc_info['access_token'])
 
