@@ -21,7 +21,6 @@ ACTION_DETAILS = map(proc_action, (
 
 class Action(models.Model):
     kind = models.CharField(max_length=12)
-    source = models.CharField(max_length=32, null=True)
     destination = models.CharField(max_length=32, null=True)
     content = models.CharField(max_length=600) #pre-formatted string
     def static(self):

@@ -3,16 +3,16 @@ from django import forms
 from django.forms import widgets
 from models import *
 class FudanAccountForm(forms.Form):
-    username = forms.CharField(max_length=32)
-    password = forms.CharField(max_length=16, required=False, widget=widgets.PasswordInput)
+    username = forms.CharField(max_length=32, label=u'飞信帐号')
+    password = forms.CharField(max_length=16, label=u'密码', required=False, widget=widgets.PasswordInput)
     def save(self, user):
         fa, created = FudanAccount.objects.get_or_create(user=user, username=self.cleaned_data['username'])
         fa.password = self.cleaned_data['password']
         fa.save()
 
 class FetionAccountForm(forms.Form):
-    username = forms.CharField(max_length=32)
-    password = forms.CharField(max_length=16, required=False, widget=widgets.PasswordInput)
+    username = forms.CharField(max_length=32, label=u'飞信帐号')
+    password = forms.CharField(max_length=16, label=u'密码', required=False, widget=widgets.PasswordInput)
     def save(self, user):
         fa, created = FetionAccount.objects.get_or_create(user=user, username=self.cleaned_data['username'])
         fa.password = self.cleaned_data['password']

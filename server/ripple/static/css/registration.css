@@ -12,3 +12,7 @@ a, a:hover {
     margin: 0 auto;
     max-width: 740px;
 }
+
+.form-button {
+    margin-left: 180px;
+}

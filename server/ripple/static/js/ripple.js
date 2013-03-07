@@ -18,6 +18,16 @@ $(document).ready(function(){
             "fetion-send2me": ["", "发送的飞信"],
             "fetion-send2others": ["收件人飞信号", "发送的飞信内容"],
         },
+        dataFromTrigger: {
+            "weibo-new": {"username": "微博用户名", "content": "微博内容", "createdAt": "发表日期"},
+            "renren-new": {"username": "人人用户名", "content": "人人状态内容", "createdAt": "发布日期"},
+            "fudan-new": {"username": "邮件发信人", "title": "邮件标题", "createdAt": "发信日期"},
+            "weather-rain": {"weather":"天气", "temperature":"温度", "createdAt":"日期"},
+            "weather-larger": {"weather":"天气", "temperature":"温度", "createdAt":"日期"},
+            "weather-smaller": {"weather":"天气", "temperature":"温度", "createdAt":"日期"},
+            "stock-larger": {"id":"股票代码", "name":"股票名称", "price":"股票价格"},
+            "stock-smaller": {"id":"股票代码", "name":"股票名称", "price":"股票价格"},
+        },
     });
     $.fn.extend({
         freezeInput: function(hint) {
@@ -42,6 +52,13 @@ $(document).ready(function(){
                     $(this).width($(this).width() + 27);
                 }
             }
-        }
+        },
+        updateOptions: function(hash) {
+            selects = ["<option>插入信号中的数据</option>"];
+            for (var key in hash) {
+                selects.push("<option value=" + key + ">" + hash[key] + "</option>");
+            }
+            $(this).html(selects.join(","));
+        },
     });
 });
