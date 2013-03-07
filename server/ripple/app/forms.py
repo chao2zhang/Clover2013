@@ -3,7 +3,7 @@ from django import forms
 from django.forms import widgets
 from models import *
 class FudanAccountForm(forms.Form):
-    username = forms.CharField(max_length=32, label=u'飞信帐号')
+    username = forms.CharField(max_length=32, label=u'复旦邮箱')
     password = forms.CharField(max_length=16, label=u'密码', required=False, widget=widgets.PasswordInput)
     def save(self, user):
         fa, created = FudanAccount.objects.get_or_create(user=user, username=self.cleaned_data['username'])

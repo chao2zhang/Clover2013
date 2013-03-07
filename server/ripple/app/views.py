@@ -36,7 +36,6 @@ def new_task(request):
             request.flash['alert-success'] = u'涟漪创建成功'
             return redirect(task)
 
-    print form.errors
     return render_to_response(t, {
         'triggers'  :active_triggers(request.user),
         'actions'   :active_actions(request.user),
