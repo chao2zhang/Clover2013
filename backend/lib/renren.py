@@ -26,9 +26,9 @@ class RenrenConfig:
 		APP_SECRET_KEY = "a460be7eee9b4049b6c55fcd963d53f7"
 
 		SUPPORTED_REQUESTS = {
-				'getStatus': SupportedAPI('status.gets', ['read_user_status']),
 				'setStatus': SupportedAPI('status.set', ['status_update']),
-				'forward': SupportedAPI('status.forward', ['status_update'])
+				'forward': SupportedAPI('status.forward', ['status_update']),
+				'getFeed': SupportedAPI('feed.get', ['read_user_feed'])
 				#'share': SupportedAPI('share.share', ['publish_share']),
 				#'addCommentToStatus': SupportedAPI('status.addComment', ['read_user_status' ,'publish_comment']),
 				#'addCommentToBlog': SupportedAPI('blog.addComment', ['publish_blog' ,'publish_comment'])
@@ -128,12 +128,9 @@ class RenrenClient(object):
 		"""
 		return isinstance(str, unicode) and str.encode('utf-8') or str
 
-	def getStatus(self, uid = None):
-		if uid:
-			return self.request('getStatus', {'uid': uid})[0]
-		else:
-			return self.request('getStatus')[0]
-	
+	def getFeed(self):
+		return self.request('getFeed', {'type': '10', 'count': '50'})
+			
 	def setStatus(self, content):
 		ret = self.request('setStatus', {'status': content})['result']
 		log(ret)

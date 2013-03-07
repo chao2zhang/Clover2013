@@ -3,7 +3,7 @@ from DbUtils import *
 
 from triggers import *
 '''
-HANDLER(trigger_info, user_info)
+HANDLER(trigger_info, action_info, user_info)
 return list of content should be logged into table app_pending
 each item in the list generate a app_pending entry 
 return [] when fail
@@ -22,7 +22,7 @@ def run():
 		action_info = fetchById('app_action', task_info['action_id'])
 
 		pending_info = {'done': 0, 'action_id': task_info['action_id']}
-		content = HANDLERS[trigger_info['kind']](trigger_info, user_info)
+		content = HANDLERS[trigger_info['kind']](action_info, trigger_info, user_info)
 		
 		for c in content:
 			pending_info['content'] = c
