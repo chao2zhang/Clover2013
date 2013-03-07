@@ -10,7 +10,8 @@ def post(pending_info, action_info):
 		user_info, acc_info = getInfo(pending_info['action_id'], 'app_weiboaccount')
 
 		weibo = Weibo(acc_info['access_token'])
-
+		
+		weibo.update_status(status=pending_info['content'])
 	except:
 		return False
 	return True
