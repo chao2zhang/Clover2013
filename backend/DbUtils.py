@@ -1,4 +1,4 @@
-DB_NAME = 'sqlite.db'
+DB_NAME = '../server/ripple/sqlite.db'
 APP_TRIGGER = ('id', 'kind', 'source', 'content', 'updated_at')
 APP_TASK = ('id', 'user_id', 'trigger_id', 'action_id', 'parent_id', 'description', 'created_at', 'count', 'public')
 APP_PENDING = ('id', 'action_id', 'done', 'content')
