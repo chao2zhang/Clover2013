@@ -4,20 +4,30 @@
 {% load staticfiles %}
 
 {% block title %}
-    Edit Task
+    编辑涟漪
 {% endblock %}
 
 {% block navbar_js %}
 {% endblock %}
 
+{% block js %}
+    <script type="text/javascript" src="/static/js/edit_task.js"></script>
+{% endblock %}
+
+
 {% block page_title %}
-    <h3>Edit Task</h3>
+    <h3>编辑涟漪</h3>
 {% endblock %}
 
 {% block content %}
 
     {% trigger_action_line task %}
-    <form id="task_edit_form" class="form-horizontal" method="post" action="">
+    <form id="task-edit-form" class="form-horizontal" method="post" action="">
+        <div class="row-fluid">
+            <div class="span12">
+                <h3>附加信息</h3>
+            </div>
+        </div>
         {% csrf_token %}
         {{ form.non_field_errors }}
         {% for field in form.visible_fields %}
@@ -32,7 +42,7 @@
         {% for field in form.hidden_fields %}
             <div style="display:none;">{{ field }}</div>
         {% endfor %}
-        <input class="btn btn-large btn-primary" type="submit" value="edit" />
+        <input class="btn btn-large btn-primary form-button" type="submit" value="更改" />
     </form>
 
 {% endblock %}

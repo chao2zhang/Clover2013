@@ -5,7 +5,7 @@
 {% load staticfiles %}
 
 {% block title %}
-    Bind Fetion
+    绑定飞信
 {% endblock %}
 
 {% block navbar_js %}
@@ -13,14 +13,17 @@
 {% endblock %}
 
 {% block page_title %}
-    <h3>Bind Fetion Account</h3>
+    <h3>绑定飞信</h3>
 {% endblock %}
 
 {% block content %}
 
 <div class="alert alert-info">
-    Filling your username enables system to send Fetion messages to you.<br/>
-    Filling your password enables system to use your account to send Fetion messages to others.
+    填写手机号，并加系统飞信为好友，系统可以发送飞信给你的手机。
+</div>
+
+<div class="alert alert-danger">
+    填写密码，系统可以使用你的飞信帐号发送飞信。注意，请不要过分依赖系统的安全性。
 </div>
 
 <form class="form" method="post" action="">
@@ -35,7 +38,7 @@
             </div>
         </div>
     {% endfor %}
-    <input class="btn btn-large btn-success" type="submit" value="bind" />
+    <input class="btn btn-large btn-success" type="submit" value="绑定" />
 </form>
 
 {% endblock %}

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
@@ -32,7 +33,7 @@ def new_task(request):
         form = TaskForm(request.POST)
         if form.is_valid():
             task = form.save(request.user)
-            request.flash['alert-success'] = 'Task created successfully'
+            request.flash['alert-success'] = u'涟漪创建成功'
             return redirect(task)
 
     print form.errors
@@ -73,7 +74,7 @@ def edit_task(request, id):
         form = TaskEditForm(request.POST)
         if form.is_valid():
             task = form.save(request.user)
-            request.flash['alert-success'] = 'Task edited successfully'
+            request.flash['alert-success'] = u'涟漪编辑成功'
             return redirect(task)
     return render_to_response(t, {
         'form': form,
@@ -90,6 +91,7 @@ def delete_task(request, id):
 def clone_task(request, id):
     task = get_object_or_404(Task, pk=id)
     task = task.clone(request.user)
+    request.flash['alert-success'] = u'涟漪复制成功'
     return redirect(edit_task, id=task.id)
 
 @login_required
@@ -118,19 +120,19 @@ def bind_weibo(request):
         wa.access_token = request.GET['code']
         wa.save()
     else:
-        request.flash['alert-error'] = 'Canceled'
+        request.flash['alert-error'] = u'已取消授权'
     return redirect(bind)
 
 @require_GET
 @login_required
 def bind_renren(request):
     if request.GET.get('code'):
-        request.flash['alert-success'] = 'Renren binded successfully'
+        request.flash['alert-success'] = u'人人绑定成功'
         ra, created = RenrenAccount.objects.get_or_create(user=request.user)
         ra.access_token = request.GET['code']
         ra.save()
     else:
-        request.flash['alert-error'] = 'Canceled'
+        request.flash['alert-error'] = '已取消授权'
     return redirect(bind)
 
 @login_required
@@ -141,7 +143,7 @@ def bind_fetion(request):
         form = FetionAccountForm(request.POST)
         if form.is_valid():
             form.save(request.user)
-            request.flash['alert-success'] = 'Fetion binded successfully'
+            request.flash['alert-success'] = u'飞信绑定成功'
             return redirect(bind)
     return render_to_response(t, {
         'form':form,
@@ -155,7 +157,7 @@ def bind_fudan(request):
         form = FudanAccountForm(request.POST)
         if form.is_valid():
             form.save(request.user)
-            request.flash['alert-success'] = 'FudanMail binded successfully'
+            request.flash['alert-success'] = u'复旦邮箱绑定成功'
             return redirect(bind)
     return render_to_response(t, {
         'form':form,

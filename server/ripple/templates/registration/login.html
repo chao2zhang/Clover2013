@@ -1,7 +1,9 @@
 {% extends "registration/base.html" %}
 
+{% load tags %}
+
 {% block title %}
-    Login
+    登陆
 {% endblock %}
 
 {% block navbar_js %}
@@ -10,19 +12,19 @@
 
 {% block content %}
 
-<form class="form" method="post" action="/accounts/login/">
+<form class="form-horizontal" method="post" action="/accounts/login/">
     {% csrf_token %}
     {{ form.non_field_errors }}
     {% for field in form %}
         <div class="control-group">
             {{ field.errors }}
-            {{ field.label_tag }} 
+            {{ field|label_with_classes:"control-label"}} 
             <div class="controls">
                 {{ field }}
             </div>
         </div>
     {% endfor %}
-    <input class="btn btn-large btn-primary" type="submit" value="login" />
+    <input class="btn btn-large btn-primary form-button" type="submit" value="登录"/>
 </form>
 
 {% endblock %}

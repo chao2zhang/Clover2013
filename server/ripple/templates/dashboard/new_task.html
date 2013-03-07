@@ -3,8 +3,12 @@
 {% load tags %}
 {% load staticfiles %}
 
+{% block js %}
+    <script type="text/javascript" src="/static/js/new_task.js"></script>
+{% endblock %}
+
 {% block title %}
-    Create Task
+    新涟漪
 {% endblock %}
 
 {% block navbar_js %}
@@ -12,14 +16,14 @@
 {% endblock %}
 
 {% block page_title %}
-<h3>Create a task</h3>
+<h3>新涟漪</h3>
 {% endblock %}
 
 {% block content %}
     <div id="trigger-panel">
         <div class="row-fluid">
             <div class="span12">
-                <h3>Choose a trigger</h3>
+                <h3>选择信号</h3>
             </div>
         </div>
         {% for trigger in triggers %}
@@ -32,7 +36,7 @@
     <div id="action-panel" style="display:none">
         <div class="row-fluid">
             <div class="span12">
-                <h3>Choose a action</h3>
+                <h3>选择行动</h3>
             </div>
         </div>
         {% for action in actions %}
@@ -45,7 +49,7 @@
     <div id="form-panel" style="display:none">
         <div class="row-fluid">
             <div class="span12">
-                <h3>Extra information</h3>
+                <h3>附加信息</h3>
             </div>
         </div>
         <form id="task_new_form" class="form-horizontal" method="post" action="">
@@ -61,31 +65,10 @@
                 </div>
             {% endfor %}
             {% for field in form.hidden_fields %}
-                <div style="display:none;">{{ field }}</div>
+                <div class="hide">{{ field }}</div>
             {% endfor %}
-            <input class="btn btn-large btn-primary" type="submit" value="create" />
+            <input class="btn btn-large btn-primary form-button" type="submit" value="创建" />
         </form>
     </div>
-
-    <script>
-    (function(){
-        $(".trigger-grid").click(function() {
-            $(".trigger-grid").removeClass("chosen");
-            $(this).addClass("chosen");
-            $("input#id_trigger_kind").val($(this).attr('id'));
-            if ($("#action-panel").is(":hidden"))
-                $("#action-panel").slideDown();
-        });
-        $(".action-grid").click(function() {
-            $(".action-grid").removeClass("chosen");
-            $(this).addClass("chosen");
-            $("input#id_action_kind").val($(this).attr('id'));
-            if ($("#form-panel").is(":hidden"))
-                $("#form-panel").slideDown();
-        });
-    }).call(this);
-    </script>
-
-
 
 {% endblock %}

@@ -1,13 +1,22 @@
 body{
     padding-top: 20px;
     padding-bottom: 40px;
+    background: url('/static/img/background.jpg') repeat-x #f7f5e9;
 }
 
 a, a:hover {
     text-decoration: none;
 }
 
-#form-panel input[type="text"], #form-panel textarea {
+hr {
+    border-top-color: #3a87ad;
+}
+
+.form-horizontal .control-label {
+    width: 120px;
+}
+
+#form-panel input[type="text"], #form-panel textarea, #task-edit-form input[type="text"], #task-edit-form textarea {
     width: 500px;
 }
 
@@ -16,8 +25,26 @@ a, a:hover {
     max-width: 740px;
 }
 
-.middle-arrow {
-    margin-top: 34px;
+.controls.input-prepend {
+    display: block;
+}
+
+.right-triangle {
+    width: 0px;
+    height: 0px;
+    border-style: solid;
+    border-width: 20px 0 20px 20px;
+    border-color: transparent transparent transparent #666;
+}
+
+.task-line .right-triangle {
+    float: left;
+    margin: 20px 5px;
+}
+
+.trigger-action-line .right-triangle {
+    float: left;
+    margin: 23px 0px 23px 20px;
 }
 
 .trigger-grid div, .action-grid div {
@@ -25,10 +52,7 @@ a, a:hover {
 }
 
 .trigger-grid, .action-grid, .task-grid, .task-line, .bind-grid {
-    background: #f3f3f3;
-    border-color: #f3f3f3;
-    border-style: solid;
-    border-width: 1px;
+    background: #e7f5f9;
     margin-bottom: 5px;
     padding: 5px;
     -webkit-border-radius: 8px;
@@ -39,9 +63,21 @@ a, a:hover {
 }
 
 .action-grid.chosen, .trigger-grid.chosen {
-    border-color: #7f7f7f;
-    border-style: solid;
-    border-width: 1px;
+    background-color: #777;
+    -webkit-transition: background-color 250ms linear;
+    -moz-transition: background-color 250ms linear;
+    -o-transition: background-color 250ms linear;
+    -ms-transition: background-color 250ms linear;
+    transition: background-color 250ms linear;
+}
+
+.action-grid.chosen .action-title, .trigger-grid.chosen .trigger-title {
+    color: #fff;
+    -webkit-transition: color 250ms linear;
+    -moz-transition: color 250ms linear;
+    -o-transition: color 250ms linear;
+    -ms-transition: color 250ms linear;
+    transition: color 250ms linear;
 }
 
 .task-line {
@@ -57,8 +93,16 @@ a, a:hover {
 }
 
 .action-title, .trigger-title, .bind-title {
-    margin: 5px;
-    max-width: 130px;
+    margin: 15px 5px;
+    display: table;
+    height: 48px;
+    width: 130px;
+}
+
+.action-title h4, .trigger-title h4, .bind-title h4 {
+    display: table-cell; 
+    vertical-align: middle; 
+    text-align: center; 
 }
 
 .task-title {
@@ -73,6 +117,19 @@ a, a:hover {
 }
 
 .action-title-large, .trigger-title-large {
-    margin: 5px;
+    margin: 20px 5px;
     max-width: 270px;
+}
+
+#page-title-description {
+    margin-top: 12px;
+}
+
+
+.form-button {
+    margin-left: 180px;
+}
+
+#data_from_trigger {
+    margin-left: 180px;
 }

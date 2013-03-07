@@ -1,7 +1,9 @@
 {% extends "registration/base.html" %}
 
+{% load tags %}
+
 {% block title %}
-    Register
+    注册
 {% endblock %}
 
 {% block navbar_js %}
@@ -10,19 +12,19 @@
 
 {% block content %}
 
-<form class="form" method="post" action="/accounts/register/">
+<form class="form-horizontal" method="post" action="/accounts/register/">
     {% csrf_token %}
     {{ form.non_field_errors }}
     {% for field in form %}
         <div class="control-group">
             {{ field.errors }}
-            {{ field.label_tag }} 
+            {{ field|label_with_classes:"control-label"}} 
             <div class="controls">
                 {{ field }}
             </div>
         </div>
     {% endfor %}
-    <input class="btn btn-large btn-success" type="submit" value="register" />
+    <input class="btn btn-large btn-success form-button" type="submit" value="注册"/>
 </form>
 
 {% endblock %}
