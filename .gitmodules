@@ -1,0 +1,6 @@
+[submodule "backend/lib/weipansdk"]
+	path = backend/lib/weipansdk
+	url = git://github.com/ddliu/weipan-sdk-python.git
+[submodule "backend/lib/python-blogger"]
+	path = backend/lib/python-blogger
+	url = git://github.com/theatlantic/python-blogger.git
