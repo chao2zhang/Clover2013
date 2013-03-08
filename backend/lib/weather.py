@@ -16,7 +16,6 @@ def get_woeid(city, province, country):
     rootElem = tree.getroot()
     return rootElem.find(placetag).find(woeidtag).text
 
-
 def weather_now(city, province, country):
     woeid = get_woeid(city, province, country)
     url = rss_query % str(woeid)

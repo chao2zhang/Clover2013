@@ -57,10 +57,12 @@ class SmtpClient:
 		msg['To'] = ', '.join(to)
 		msg['Subject'] = subject 
 		msg['Date'] = formatdate(localtime=True) 
-		msg.attach(mime.Text.MIMEText(content.encode('utf-8')))
+		msg.attach(mime.Text.MIMEText(content.encode('utf-8'), 'plain','UTF-8'))
 		
 		self.server.sendmail(fro, to, msg.as_string())
 
 if __name__ == '__main__':
-	pass
+	me = '10300240067@fudan.edu.cn'
+	tg = 'x_c0@163.com'
+	sub = 'hello'
 	#smtp.send("10300240067@fudan.edu.cn", ["x_c0@163.com"], "tasdasdest", "hehehehehehe")

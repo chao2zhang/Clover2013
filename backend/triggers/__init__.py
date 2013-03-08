@@ -1,1 +1,1 @@
-__all__ = ['MailTrigger', 'WeiboTrigger', 'RenrenTrigger']
+__all__ = ['MailTrigger', 'WeiboTrigger', 'RenrenTrigger', 'StockTrigger', 'WeatherTrigger']

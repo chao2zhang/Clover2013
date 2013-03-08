@@ -11,7 +11,11 @@ return [] when fail
 HANDLERS = {
 	'fudan-new': MailTrigger.testFudan, 
 	'weibo-new': WeiboTrigger.test, 
-	'renren-new': RenrenTrigger.test
+	'renren-new': RenrenTrigger.test,
+	'weather-larger': WeatherTrigger.test,
+	'weather-smaller': WeatherTrigger.test,
+	'stock-larger': StockTrigger.test,
+	'stock-smaller': StockTrigger.test
 	}
 
 def run():
