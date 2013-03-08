@@ -41,7 +41,7 @@ except ImportError:
         parse_json = lambda s: simplejson.loads(s)
 
 class Weibo(object):
-    def __init__(self, access_token, api_key = WeiboConfig.APP_API_KEY, secret_key = WeiboConfig.APP_SECRET_KEY):
+    def __init__(self, access_token = None, api_key = WeiboConfig.APP_API_KEY, secret_key = WeiboConfig.APP_SECRET_KEY):
         self.api_key = api_key
         self.secret_key = secret_key
         self.access_token = access_token

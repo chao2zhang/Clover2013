@@ -7,11 +7,12 @@ def send2others(pending_info, action_info):
 	print action_info
 	print '-' * 50
 	try:
-		user_info, acc_info = getInfo(pending_info['user_id'], 'app_fudanaccount')
+		user_info, acc_info = getInfo(pending_info['action_id'], 'app_fudanaccount')
 
 		smtp = SmtpClient(acc_info['username'], acc_info['password'])	
-		smtp.send(acc_info['username'], [action_info['destination']], 'hello from ripple', pending_info['content'])
+		smtp.send(user_info['email'], [action_info['destination']], 'hello from ripple', pending_info['content'])
 	except:
+		print 'send mail failed'
 		return False
 	
 	return True
@@ -25,11 +26,12 @@ def send2me(pending_info, action_info):
 	print action_info
 	print '-' * 50
 	try:
-		user_info, acc_info = getInfo(pending_info['user_id'], 'app_fudanaccount')
+		user_info, acc_info = getInfo(pending_info['action_id'], 'app_fudanaccount')
 
 		smtp = SmtpClient(acc_info['username'], acc_info['password'])	
 		smtp.send('ripple', [user_info['email']], 'hello from ripple', pending_info['content'])
 	except:
+		print 'send mail failed'
 		return False
 	
 	return True
