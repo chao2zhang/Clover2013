@@ -6,6 +6,8 @@ from django.views.decorators.http import require_GET
 from django.contrib.auth.models import User
 from models import *
 from forms import TaskForm, TaskEditForm, FudanAccountForm, FetionAccountForm
+from oauth.renren import Renren
+from oauth.weibo import Weibo
 
 @login_required
 def dashboard(request):
@@ -60,7 +62,6 @@ def edit_task(request, id):
         'trigger_source'    :task.trigger.source,
         'trigger_content'   :task.trigger.content,
         'action_kind'       :task.action.kind,
-        'action_source'     :task.action.source,
         'action_destination':task.action.destination,
         'action_content'    :task.action.content,
         'description'       :task.description,
@@ -114,9 +115,9 @@ def list_hot(request):
 @login_required
 def bind_weibo(request):
     if request.GET.get('code'):
-        request.flash['alert-success'] = 'Weibo binded successfully'
+        request.flash['alert-success'] = '微博绑定成功'
         wa, created = WeiboAccount.objects.get_or_create(user=request.user)
-        wa.access_token = request.GET['code']
+        wa.access_token = Weibo().auth(request.GET['code'])
         wa.save()
     else:
         request.flash['alert-error'] = u'已取消授权'
@@ -128,7 +129,7 @@ def bind_renren(request):
     if request.GET.get('code'):
         request.flash['alert-success'] = u'人人绑定成功'
         ra, created = RenrenAccount.objects.get_or_create(user=request.user)
-        ra.access_token = request.GET['code']
+        ra.access_token = Renren().auth(request.GET['code'])
         ra.save()
     else:
         request.flash['alert-error'] = '已取消授权'
