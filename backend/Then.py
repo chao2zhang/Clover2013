@@ -27,7 +27,6 @@ def run():
 
 		if HANDLERS[action_info['kind']](pending_info, action_info):
 			execute('delete from app_pending where id=' + str(pending_info['id']))
-	con.commit()
 
 if __name__ == '__main__':
 	pass

@@ -14,17 +14,20 @@ APP_SINABLOGACCOUNT = ('id', 'username', 'password', 'user_id')
 import sqlite3
 from time import strptime, mktime
 
-con = sqlite3.connect(DB_NAME)
 
 def execute(sql):
-	return con.cursor().execute(sql)
+	con = sqlite3.connect(DB_NAME)
+	ret = con.cursor().execute(sql).fetchall()
+	con.commit()
+	con.close()
+	return ret
 
 def fetchById(table, id_):
-	data = execute('select * from %s where id=%s' % (table, id_)).fetchone()
+	data = execute('select * from %s where id=%s' % (table, id_))[0]
 	return dict(zip(eval(table.upper()), data))
 
 def fetchByUserId(table, id_):
-	return dict(zip(eval(table.upper()), execute('select * from %s where user_id=%s' % (table, id_)).fetchone()))
+	return dict(zip(eval(table.upper()), execute('select * from %s where user_id=%s' % (table, id_))[0]))
 
 def insert(table, info):
 	columns = ','.join(str(item[0]) for item in info.items())
@@ -37,7 +40,6 @@ def str2time(str_):
 
 def clearPending():
 	execute('delete from app_pending where done=0')
-	con.commit()
 
 if __name__ == '__main__':
 	test = {'action_id': 1, 'user_id': 1, 'content': 'hello'}

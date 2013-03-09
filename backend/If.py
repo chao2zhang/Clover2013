@@ -42,7 +42,6 @@ def run():
 			log(pending_info)
 			insert('app_pending', pending_info)
 		execute("update app_trigger set updated_at = datetime('now') where id = %s" % trigger_info['id'])
-	con.commit()	
 
 if __name__ == '__main__':
 	pass
