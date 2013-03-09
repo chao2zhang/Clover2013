@@ -7,5 +7,6 @@ def start():
 		rd += 1
 		print 'round: %d' % rd
 		If.run()
+		print '---------------Then--------------'
 		Then.run()
 		sleep(10)

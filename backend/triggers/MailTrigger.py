@@ -2,9 +2,8 @@ from helper import *
 from lib.mail import PopClient
 from time import ctime
 
-def test(pop_host, trigger_info, action_info, user_info):
+def test(pop_host, trigger_info, action_info, acc_info):
 	try:
-		acc_info = fetchByUserId('app_fudanaccount', user_info['id'])
 		pop = PopClient(acc_info['username'], acc_info['password'], pop_host)
 		ret = []
 		for i in range(pop.count()):
@@ -22,7 +21,9 @@ def test(pop_host, trigger_info, action_info, user_info):
 		return []
 
 def testFudan(trigger_info, action_info, user_info):
-	return test('mail.fudan.edu.cn', trigger_info, action_info, user_info)
+	acc_info = fetchByUserId('app_fudanaccount', user_info['id'])
+	return test('mail.fudan.edu.cn', trigger_info, action_info, acc_info)
 
 def test163(trigger_info, action_info, user_info):
-	return test('pop3.163.com', trigger_info, action_info, user_info)
+	acc_info = fetchByUserId('app_wangyiaccount', user_info['id'])
+	return test('pop3.163.com', trigger_info, action_info, acc_info)

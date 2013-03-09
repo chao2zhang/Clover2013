@@ -22,6 +22,8 @@ def run():
 	for pending in execute('select * from app_pending'):
 		pending_info = dict(zip(APP_PENDING, pending))	
 		action_info = fetchById('app_action', pending_info['action_id'])	
+		
+		print action_info['kind']
 
 		if HANDLERS[action_info['kind']](pending_info, action_info):
 			execute('delete from app_pending where id=' + str(pending_info['id']))
