@@ -2,11 +2,30 @@
 from django import forms
 from django.forms import widgets
 from models import *
+class WangyiAccountForm(forms.Form):
+    username = forms.CharField(max_length=32, label=u'网易邮箱')
+    password = forms.CharField(max_length=16, label=u'密码', required=False, widget=widgets.PasswordInput)
+    def save(self, user):
+        wa, created = WangyiAccount.objects.get_or_create(user=user)
+        wa.username = self.cleaned_data['username']
+        wa.password = self.cleaned_data['password']
+        wa.save()
+
+class SinablogAccountForm(forms.Form):
+    username = forms.CharField(max_length=32, label=u'新浪博客用户名')
+    password = forms.CharField(max_length=16, label=u'密码', required=False, widget=widgets.PasswordInput)
+    def save(self, user):
+        wa, created = SinablogAccount.objects.get_or_create(user=user)
+        wa.username = self.cleaned_data['username']
+        wa.password = self.cleaned_data['password']
+        wa.save()
+
 class FudanAccountForm(forms.Form):
     username = forms.CharField(max_length=32, label=u'复旦邮箱')
     password = forms.CharField(max_length=16, label=u'密码', required=False, widget=widgets.PasswordInput)
     def save(self, user):
-        fa, created = FudanAccount.objects.get_or_create(user=user, username=self.cleaned_data['username'])
+        fa, created = FudanAccount.objects.get_or_create(user=user)
+        fa.username = self.cleaned_data['username']
         fa.password = self.cleaned_data['password']
         fa.save()
 
@@ -14,7 +33,8 @@ class FetionAccountForm(forms.Form):
     username = forms.CharField(max_length=32, label=u'飞信帐号')
     password = forms.CharField(max_length=16, label=u'密码', required=False, widget=widgets.PasswordInput)
     def save(self, user):
-        fa, created = FetionAccount.objects.get_or_create(user=user, username=self.cleaned_data['username'])
+        fa, created = FetionAccount.objects.get_or_create(user=user)
+        fa.username = self.cleaned_data['username']
         fa.password = self.cleaned_data['password']
         fa.save()
 

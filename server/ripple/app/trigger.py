@@ -13,6 +13,7 @@ TRIGGER_DETAILS = map(proc_trigger, (
     {'title': u'当收到一条微博', 'trigger_kind': 'weibo-new', 'require_password': False},
     {'title': u'当收到一条人人状态', 'trigger_kind': 'renren-new', 'require_password': False},
     {'title': u'当收到一封复旦邮件', 'trigger_kind': 'fudan-new', 'require_password': True},
+    {'title': u'当收到一封163邮件', 'trigger_kind': 'wangyi-new', 'require_password': True},
     {'title': u'今日有雨雪', 'trigger_kind': 'weather-rain', 'require_password': False},
     {'title': u'今日温度大于', 'trigger_kind': 'weather-larger', 'require_password': False},
     {'title': u'今日温度小于', 'trigger_kind': 'weather-smaller', 'require_password': False},
