@@ -67,6 +67,5 @@ if __name__ == '__main__':
 	me = '10300240067@fudan.edu.cn'
 	tg = 'x_c0@163.com'
 	sub = 'hello'
-	pop = PopClient('10300240067@fudan.edu.cn', 'z8dfn33_m221s')
 	smtp = SmtpClient('RippleServer@163.com', 'chaomataiqiangle', 'smtp.163.com')
 	#smtp.send("10300240067@fudan.edu.cn", ["x_c0@163.com"], "tasdasdest", "hehehehehehe")
