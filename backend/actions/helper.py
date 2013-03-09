@@ -2,6 +2,7 @@ import sys
 sys.path.append('..')
 
 from DbUtils import *
+from traceback import print_exc
 
 def getInfo(aid, acc_table):
 	task_info = execute('select * from app_task where action_id=' + str(aid)).fetchone()

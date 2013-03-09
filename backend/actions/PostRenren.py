@@ -8,12 +8,7 @@ def post(pending_info, action_info):
 		renren = RenrenClient(acc_info['access_token'])
 		renren.setStatus(pending_info['content'].replace('\n', ' ').encode('utf-8'))
 
+		return True
 	except:
-		print 'post renren failed'
-		print '-' * 50
-		print pending_info
-		print '-' * 50
-		print action_info
-		print '-' * 50
+		print_exc()
 		return False
-	return True

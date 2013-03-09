@@ -12,15 +12,11 @@ def send2others(host, pending_info, action_info):
 
 		smtp = SmtpClient(acc_info['username'], acc_info['password'], host)
 		smtp.send(acc_info['username'], [action_info['destination']], 'hello from ripple', pending_info['content'])
+		return True
 	except:
-		print 'send mail failed'
-		print pending_info
-		print '-' * 50
-		print action_info
-		print '-' * 50
+		print_exc()
 		return False
 	
-	return True
 
 def sendfudan(pending_info, action_info):
 	return send2others('mail.fudan.edu.cn', pending_info, action_info)
@@ -40,12 +36,8 @@ def send2me(pending_info, action_info):
 
 		smtp = SmtpClient(SMTP_ACC, ACC_PWD, 'smtp.163.com')
 		smtp.send(SMTP_ACC, [user_info['email']], 'hello from ripple', pending_info['content'])
+		return True
 	except:
-		print 'send mail failed'
-		print pending_info
-		print '-' * 50
-		print action_info
-		print '-' * 50
+		print_exc()
 		return False
 	
-	return True
