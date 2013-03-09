@@ -88,7 +88,6 @@ class RenrenClient(object):
 			'redirect_uri': RenrenConfig.LOGIN_SUCCESS,
 		}
 		response = urllib.urlopen("%s?%s" % (RenrenConfig.ACCESS_TOKEN_URI, urllib.urlencode(args))).read()
-		log(response)
 		self.access_token = parse_json(response)["access_token"]
 		"""
 		'''Obtain session key from the Resource Service.''' 
@@ -112,7 +111,6 @@ class RenrenClient(object):
 				post_data = None if not params else urllib.urlencode(params)
 				response = urllib.urlopen(RenrenConfig.API_SERVER, post_data).read()
 				j = parse_json(response)
-				log(j)
 				if isinstance(j, dict) and 'error_code' in j.keys():
 						raise RenrenError(j['error_code'], j['error_msg'])
 				return j
@@ -133,7 +131,6 @@ class RenrenClient(object):
 			
 	def setStatus(self, content):
 		ret = self.request('setStatus', {'status': content})['result']
-		log(ret)
 		if str(ret) != '1': 
 			raise RenrenError(ret, 'setStatus failed')
 
@@ -148,7 +145,7 @@ class RenrenError(Exception):
 		print message
 
 def log(msg):
-	print msg
+	pass
 
 if __name__ == '__main__':
 	pass
