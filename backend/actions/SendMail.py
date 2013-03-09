@@ -29,18 +29,23 @@ def send163(pending_info, action_info):
 SMTP_ACC = 'RippleServer@163.com'
 ACC_PWD = 'chaomataiqiangle'
 
-def send2me(pending_info, action_info):
+def send2me(pending_info, action_info, acc_table):
 	'''
 	send an email to user from our account
 	'''
 	try:
-		user_info, acc_info = getInfo(pending_info['action_id'], 'app_fudanaccount')
+		user_info, acc_info = getInfo(pending_info['action_id'], acc_table)
 		title, content = split_content(pending_info['content'])
 
 		smtp = SmtpClient(SMTP_ACC, ACC_PWD, 'smtp.163.com')
-		smtp.send(SMTP_ACC, [user_info['email']], title, content)
+		smtp.send(SMTP_ACC, [acc_info['username']], title, content)
 		return True
 	except:
 		print_exc()
 		return False
 	
+def send2mefudan(pending_info, action_info):
+	return send2me(pending_info, action_info, 'app_fudanaccount')
+
+def send2me163(pending_info, action_info):
+	return send2me(pending_info, action_info, 'app_wangyiaccount')

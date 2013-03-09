@@ -7,9 +7,9 @@ HANDLER(pending_info, action_info)
 return true if success
 '''
 HANDLERS = { 
-	'fudan-send2me': SendMail.send2me,
+	'fudan-send2me': SendMail.send2mefudan,
 	'fudan-send2others': SendMail.sendfudan,
-	'wangyi-send2me': SendMail.send2me,
+	'wangyi-send2me': SendMail.send2me163,
 	'wangyi-send2others': SendMail.send163,
 	'renren-post': PostRenren.post,
 	'weibo-post': PostWeibo.post,
