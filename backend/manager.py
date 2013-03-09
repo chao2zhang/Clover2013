@@ -9,4 +9,4 @@ def start():
 		If.run()
 		print '---------------Then--------------'
 		Then.run()
-		sleep(10)
+		sleep(20)
