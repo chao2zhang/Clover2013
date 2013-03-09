@@ -1,1 +1,1 @@
-__all__ = ['SendFudanMail', 'PostRenren', 'PostWeibo']
+__all__ = ['SendMail', 'PostRenren', 'PostWeibo']
