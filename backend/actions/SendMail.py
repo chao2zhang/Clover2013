@@ -9,9 +9,11 @@ ACCOUNT_TABLE = {
 def send2others(host, pending_info, action_info):
 	try:
 		user_info, acc_info = getInfo(pending_info['action_id'], ACCOUNT_TABLE['host'])
+		title, content = split_content(pending_info['content']
 
 		smtp = SmtpClient(acc_info['username'], acc_info['password'], host)
-		smtp.send(acc_info['username'], [action_info['destination']], 'hello from ripple', pending_info['content'])
+
+		smtp.send(acc_info['username'], [action_info['destination']], title, content)
 		return True
 	except:
 		print_exc()
@@ -33,6 +35,7 @@ def send2me(pending_info, action_info):
 	'''
 	try:
 		user_info, acc_info = getInfo(pending_info['action_id'], 'app_fudanaccount')
+		title, content = split_content(pending_info['content']
 
 		smtp = SmtpClient(SMTP_ACC, ACC_PWD, 'smtp.163.com')
 		smtp.send(SMTP_ACC, [user_info['email']], 'hello from ripple', pending_info['content'])

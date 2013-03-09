@@ -10,3 +10,7 @@ def getInfo(aid, acc_table):
 	user_info = fetchById('auth_user', task_info['user_id'])
 	acc_info = fetchByUserId(acc_table, user_info['id'])
 	return (user_info, acc_info)
+
+def split_content(content):
+	tmp = content.split('&')
+	return (tmp[0], '&'.join(tmp[1:]))
