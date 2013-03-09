@@ -32,13 +32,15 @@ class PopClient:
 		raw = self.server.top(index, 0)[1]
 		msg = message_from_string('\n'.join(raw))
 		ret = {}
-		for item in ['From', 'Date']:
+		for item in ['From', 'Subject', 'Date']:
 			ret[item] = decode_header(msg[item])
 			for x in range(len(ret[item])):
-				ret[item][x] = ret[item][x][0]
-		tmp = decode_header(msg['Subject'])
-		if tmp[0][1]:
-			ret['Subject'] = tmp[0][0].decode(tmp[0][1])
+				try:
+					ret[item][x] = ret[item][x][0].decode(ret[item][x][1]) if ret[item][x][1] else ret[item][x][0]
+				except:
+					ret[item][x] = ret[item][x][0]
+		ret['From'] = ret['From'][1] if len(ret['From']) == 2 else ret['From'][0]
+		ret['Subject'] = ret['Subject'][0]
 		ret['Date'] = mktime_tz(parsedate_tz(ret['Date'][0]))
 		return ret
 
@@ -65,4 +67,5 @@ if __name__ == '__main__':
 	me = '10300240067@fudan.edu.cn'
 	tg = 'x_c0@163.com'
 	sub = 'hello'
+	smtp = SmtpClient('RippleServer@163.com', 'chaomataiqiangle', 'smtp.163.com')
 	#smtp.send("10300240067@fudan.edu.cn", ["x_c0@163.com"], "tasdasdest", "hehehehehehe")

@@ -7,8 +7,8 @@ HANDLER(pending_info, action_info)
 return true if success
 '''
 HANDLERS = { 
-	'fudan-send2me': SendFudanMail.send2me,
-	'fudan-send2others': SendFudanMail.send2others,
+	'fudan-send2me': SendMail.send2me,
+	'fudan-send2others': SendMail.send2others,
 	'renren-post': PostRenren.post,
 	'weibo-post': PostWeibo.post
 	} 
@@ -16,7 +16,6 @@ HANDLERS = {
 def run():
 	for pending in execute('select * from app_pending'):
 		pending_info = dict(zip(APP_PENDING, pending))	
-		print pending_info['content']
 		action_info = fetchById('app_action', pending_info['action_id'])	
 
 		if HANDLERS[action_info['kind']](pending_info, action_info):

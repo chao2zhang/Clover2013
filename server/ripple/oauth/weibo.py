@@ -39,10 +39,9 @@ except ImportError:
         parse_json = lambda s: simplejson.loads(s)
 
 class Weibo(object):
-    def __init__(self, api_key = WeiboConfig.APP_API_KEY, secret_key = WeiboConfig.APP_SECRET_KEY, access_token = '805ebefa6fcce01846927e945c49c922'):
+    def __init__(self, api_key = WeiboConfig.APP_API_KEY, secret_key = WeiboConfig.APP_SECRET_KEY):
         self.api_key = api_key
         self.secret_key = secret_key
-        self.access_token = access_token
     
     @staticmethod
     def auth_uri():
@@ -54,13 +53,11 @@ class Weibo(object):
         }
         return "%s?%s" % (WeiboConfig.AUTHORIZATION_URI, urllib.urlencode(args))
 
-    def auth(self):
-        print 'Please authorize: ' + self.auth_uri()
-        verification_code = raw_input('PIN:')
+    def auth(self, code):
         args = {
             'client_id': self.api_key,
             'client_secret': self.secret_key,
-            'code': verification_code,
+            'code': code,
             'grant_type': 'authorization_code',
             'redirect_uri': WeiboConfig.LOGIN_SUCCESS,
         }

@@ -27,11 +27,14 @@ def insert(table, info):
 	columns = ','.join(str(item[0]) for item in info.items())
 	values = ','.join("'" + item[1] + "'"  if isinstance(item[1], str) or isinstance(item[1], unicode) else str(item[1]) for item in info.items())
 	sql = "insert into %s (%s) values (%s)" % (table, columns, values)
-	print sql
 	execute(sql)
 
 def str2time(str_):
-	return mktime(strptime(str_.partition('.')[0], '%Y-%m-%d %H:%M:%S')) + 3600 * 8
+	return mktime(strptime(str_.partition('.')[0], '%Y-%m-%d %H:%M:%S'))
+
+def clearPending():
+	execute('delete from app_pending where done=0')
+	con.commit()
 
 if __name__ == '__main__':
 	test = {'action_id': 1, 'user_id': 1, 'content': 'hello'}

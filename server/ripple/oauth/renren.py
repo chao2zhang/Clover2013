@@ -57,10 +57,9 @@ except ImportError:
         parse_json = lambda s: simplejson.loads(s)
 
 class Renren(object):
-    def __init__(self, api_key = RenrenConfig.APP_API_KEY, secret_key = RenrenConfig.APP_SECRET_KEY, session_key = None):
+    def __init__(self, api_key = RenrenConfig.APP_API_KEY, secret_key = RenrenConfig.APP_SECRET_KEY):
         self.api_key = api_key
         self.secret_key = secret_key
-        self.access_token = access_token
     
     @staticmethod
     def auth_uri():

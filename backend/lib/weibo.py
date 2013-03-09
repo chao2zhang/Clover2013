@@ -64,7 +64,6 @@ class Weibo(object):
             'redirect_uri': WeiboConfig.LOGIN_SUCCESS,
         }
         response = urllib2.urlopen(WeiboConfig.ACCESS_TOKEN_URI, urllib.urlencode(args)).read()
-        print response
         self.access_token = parse_json(response)["access_token"]
         return self.access_token
 

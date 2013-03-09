@@ -33,7 +33,7 @@
         {% endfor %}
     </div>
 
-    <div id="action-panel" style="display:none">
+    <div id="action-panel" {%if not form.errors %}class="hide"{% endif %}>
         <div class="row-fluid">
             <div class="span12">
                 <h3>选择行动</h3>
@@ -46,7 +46,7 @@
         {% endfor %}
     </div>
 
-    <div id="form-panel" style="display:none">
+    <div id="form-panel" {%if not form.errors %}class="hide"{% endif %}>
         <div class="row-fluid">
             <div class="span12">
                 <h3>附加信息</h3>
