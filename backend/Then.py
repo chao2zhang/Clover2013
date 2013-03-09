@@ -8,9 +8,14 @@ return true if success
 '''
 HANDLERS = { 
 	'fudan-send2me': SendMail.send2me,
-	'fudan-send2others': SendMail.send2others,
+	'fudan-send2others': SendMail.sendfudan,
+	'wangyi-send2me': SendMail.send2me,
+	'wangyi-send2others': SendMail.send163,
 	'renren-post': PostRenren.post,
-	'weibo-post': PostWeibo.post
+	'weibo-post': PostWeibo.post,
+	'sinablog-post': PostSinaBlog.post,
+	'fetion-send2me': SendFetion.send2me,
+	'fetion-send2others': SendFetion.send2others
 	} 
 
 def run():

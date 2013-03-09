@@ -12,6 +12,7 @@ HANDLERS = {
 	'fudan-new': MailTrigger.testFudan, 
 	'weibo-new': WeiboTrigger.test, 
 	'renren-new': RenrenTrigger.test,
+	'wangyi-new': MailTrigger.test163,
 	'weather-larger': WeatherTrigger.testTemperature,
 	'weather-smaller': WeatherTrigger.testTemperature,
 	'weather-rain': WeatherTrigger.testRain,
