@@ -4,3 +4,6 @@
 [submodule "backend/lib/vdisk_lib"]
 	path = backend/lib/vdisk_lib
 	url = git://github.com/arapat/vdisk_lib.git
+[submodule "backend/lib/PyWapFetion"]
+	path = backend/lib/PyWapFetion
+	url = git@github.com:ComboZhc/PyWapFetion.git
