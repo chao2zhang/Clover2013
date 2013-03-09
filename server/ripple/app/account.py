@@ -11,6 +11,8 @@ ACCOUNT_NAMES = (
     "RenrenAccount",
     "FudanAccount",
     "FetionAccount",
+    "WangyiAccount",
+    "SinablogAccount",
 )
 
 UNAUTHENTICATED_ACCOUNT_NAMES = (
@@ -21,8 +23,10 @@ UNAUTHENTICATED_ACCOUNT_NAMES = (
 ACCOUNT_DETAILS = (
     {'title':u'人人网', 'kind':'renren'},
     {'title':u'新浪微博', 'kind':'weibo'},
-    {'title':u'复旦邮箱', 'kind':'fudan'},
+    {'title':u'新浪博客', 'kind':'sinablog'},
     {'title':u'飞信', 'kind':'fetion'},
+    {'title':u'复旦邮箱', 'kind':'fudan'},
+    {'title':u'网易', 'kind':'wangyi'},
 )
 
 UNAUTHENTICATED_ACCOUNT_DETAILS = (
@@ -81,3 +85,19 @@ class FetionAccount(models.Model):
     @staticmethod
     def url():
         return reverse('bind_fetion')
+
+class WangyiAccount(models.Model):
+    username = models.CharField(max_length=20)
+    password = models.CharField(max_length=16, null=True)
+    user = models.OneToOneField(User)
+    @staticmethod
+    def url():
+        return reverse('bind_wangyi')
+
+class SinablogAccount(models.Model):
+    username = models.CharField(max_length=20)
+    password = models.CharField(max_length=16, null=True)
+    user = models.OneToOneField(User)
+    @staticmethod
+    def url():
+        return reverse('bind_sinablog')

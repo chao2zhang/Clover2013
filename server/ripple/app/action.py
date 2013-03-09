@@ -11,9 +11,12 @@ def proc_action(action):
 
 ACTION_DETAILS = map(proc_action, (
     {'title': u'发表一条微博', 'action_kind': 'weibo-post', 'require_password': False},
+    {'title': u'发送一篇新浪博客', 'action_kind': 'sinablog-post', 'require_password': False},
     {'title': u'发表一条人人状态', 'action_kind': 'renren-post', 'require_password': False},
     {'title': u'发送复旦邮件给我', 'action_kind': 'fudan-send2me', 'require_password': False},
     {'title': u'发送复旦邮件给别人', 'action_kind': 'fudan-send2others', 'require_password': True},
+    {'title': u'发送网易邮件给我', 'action_kind': 'wangyi-send2me', 'require_password': False},
+    {'title': u'发送网易邮件给别人', 'action_kind': 'wangyi-send2others', 'require_password': True},
     {'title': u'发送飞信给我', 'action_kind': 'fetion-send2me', 'require_password': False},
     {'title': u'发送飞信给别人', 'action_kind': 'fetion-send2others', 'require_password': True},
     )

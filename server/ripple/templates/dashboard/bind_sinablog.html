@@ -1,0 +1,40 @@
+{% extends "dashboard/base.html" %}
+
+{% load tags %}
+
+{% load staticfiles %}
+
+{% block title %}
+    绑定新浪博客
+{% endblock %}
+
+{% block navbar_js %}
+    $("li#link-bind").addClass("active");
+{% endblock %}
+
+{% block page_title %}
+    <h3>绑定新浪博客</h3>
+{% endblock %}
+
+{% block content %}
+
+<div class="alert alert-danger">
+    填写密码，系统可以使用你的帐号发表新浪博客。注意，请不要过分依赖系统的安全性。
+</div>
+
+<form class="form" method="post" action="">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {% for field in form %}
+        <div class="control-group">
+            {{ field.errors }}
+            {{ field.label_tag }} 
+            <div class="controls">
+                {{ field }}
+            </div>
+        </div>
+    {% endfor %}
+    <input class="btn btn-large btn-success" type="submit" value="绑定" />
+</form>
+
+{% endblock %}

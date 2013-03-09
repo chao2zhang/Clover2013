@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_GET
 from django.contrib.auth.models import User
 from models import *
-from forms import TaskForm, TaskEditForm, FudanAccountForm, FetionAccountForm
+from forms import TaskForm, TaskEditForm, FudanAccountForm, FetionAccountForm, WangyiAccountForm, SinablogAccountForm
 from oauth.renren import Renren
 from oauth.weibo import Weibo
 
@@ -158,6 +158,34 @@ def bind_fudan(request):
         if form.is_valid():
             form.save(request.user)
             request.flash['alert-success'] = u'复旦邮箱绑定成功'
+            return redirect(bind)
+    return render_to_response(t, {
+        'form':form,
+        }, context_instance=RequestContext(request))
+
+@login_required
+def bind_wangyi(request):
+    t = 'dashboard/bind_wangyi.html'
+    form = WangyiAccountForm()
+    if request.POST:
+        form = WangyiAccountForm(request.POST)
+        if form.is_valid():
+            form.save(request.user)
+            request.flash['alert-success'] = u'网易邮箱绑定成功'
+            return redirect(bind)
+    return render_to_response(t, {
+        'form':form,
+        }, context_instance=RequestContext(request))
+
+@login_required
+def bind_sinablog(request):
+    t = 'dashboard/bind_sinablog.html'
+    form = SinablogAccountForm()
+    if request.POST:
+        form = SinablogAccountForm(request.POST)
+        if form.is_valid():
+            form.save(request.user)
+            request.flash['alert-success'] = u'新浪绑定成功'
             return redirect(bind)
     return render_to_response(t, {
         'form':form,
