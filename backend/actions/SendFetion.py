@@ -14,7 +14,7 @@ def send2others(pending_info, action_info):
 def send2me(pending_info, action_info):
 	try:
 		user_info, acc_info = getInfo(pending_info['action_id'], 'app_fetionaccount')
-		
+
 		send2self(acc_info['username'], acc_info['password'], pending_info['content'].encode('utf-8'))
 		return True
 	except:

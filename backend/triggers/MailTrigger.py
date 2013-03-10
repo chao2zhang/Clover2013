@@ -8,13 +8,11 @@ def test(pop_host, trigger_info, action_info, acc_info):
 		ret = []
 		for i in range(pop.count()):
 			msg = pop.fetch(i + 1)
-			if msg['Date'] > trigger_info['updated_at'] and msg['Subject'].find(trigger_info['content']) != -1:
-				for item in msg['From']:
-					if item.find(trigger_info['source']) != -1:
-						fmt = action_info['content'].replace('{{username}}', ''.join(msg['From']))
-						fmt = fmt.replace('{{title}}', msg['Subject'])
-						ret.append(fmt.replace('{{createdAt}}', ctime(msg['Date'])))
-						break
+			if msg['Date'] > trigger_info['updated_at'] and msg['Subject'].find(trigger_info['content']) != -1 and msg['From'].find(trigger_info['source']) != -1:
+				fmt = action_info['content'].replace('{{username}}', ''.join(msg['From']))
+				fmt = fmt.replace('{{title}}', msg['Subject'])
+				ret.append(fmt.replace('{{createdAt}}', ctime(msg['Date'])))
+				break
 		return ret
 	except:
 		print_exc()

@@ -23,7 +23,7 @@ HANDLERS = {
 def log(msg):
 	print msg
 
-def run():
+def run(trigger_list):
 	for task in execute('select * from app_task'):
 		task_info = dict(zip(APP_TASK, task))
 		user_info = fetchById('auth_user', task_info['user_id']) 
@@ -32,6 +32,8 @@ def run():
 
 		trigger_info['updated_at'] = str2time(trigger_info['updated_at']) + 8 * 3600
 
+		if not trigger_info['kind'] in trigger_list:
+			continue
 		log(trigger_info['kind'])
 
 		pending_info = {'done': 0, 'action_id': task_info['action_id']}
