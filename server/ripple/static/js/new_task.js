@@ -32,8 +32,10 @@ $(document).ready(function(){
         $(".trigger-grid").removeClass("chosen");
         $(this).addClass("chosen");
         updateTriggerKind($(this).attr("id"));
-        if ($("#action-panel").is(":hidden"))
+        if ($("#action-panel").is(":hidden")) {
+            $("#action-panel").removeClass("hide");
             $("#action-panel").fadeIn("slow");
+        }
         $('html, body').animate({
             scrollTop: $("#action-panel").offset().top
         }, 1000);
@@ -42,8 +44,10 @@ $(document).ready(function(){
         $(".action-grid").removeClass("chosen");
         $(this).addClass("chosen");
         updateActionKind($(this).attr("id"));
-        if ($("#form-panel").is(":hidden"))
+        if ($("#form-panel").is(":hidden")) {
+            $("#form-panel").removeClass("hide");
             $("#form-panel").fadeIn("slow");
+        }
         $('html, body').animate({
             scrollTop: $("#form-panel").offset().top
         }, 1000);

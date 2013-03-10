@@ -1,4 +1,6 @@
-DB_NAME = '/home/xc/Desktop/Clover2013/server/ripple/sqlite.db'
+# DB_NAME = '/home/xc/Desktop/Clover2013/server/ripple/sqlite.db'
+DB_NAME = '/Users/chaozhang/Development/clover/server/ripple/sqlite.db'
+
 APP_TRIGGER = ('id', 'kind', 'source', 'content', 'updated_at')
 APP_TASK = ('id', 'user_id', 'trigger_id', 'action_id', 'parent_id', 'description', 'created_at', 'count', 'public')
 APP_PENDING = ('id', 'action_id', 'done', 'content')
