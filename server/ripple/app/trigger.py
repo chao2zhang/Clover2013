@@ -2,11 +2,12 @@
 from django.db import models
 from django.contrib.auth.models import User
 from account import binded_account
-from utils import account_with_kind, static_with_kind
+from utils import account_with_kind, static_with_kind, static_unbind_with_kind
 
 def proc_trigger(trigger):
     trigger['kind'] = trigger['trigger_kind'].partition('-')[0]
     trigger['static'] = static_with_kind(trigger['kind'])
+    trigger['static_unbind'] = static_unbind_with_kind(trigger['kind'])
     return trigger
 
 TRIGGER_DETAILS = map(proc_trigger, (
@@ -29,6 +30,8 @@ class Trigger(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     def static(self):
         return static_with_kind(self.kind.partition('-')[0])
+    def static_unbind(self):
+        return static_unbind_with_kind(self.kind.partition('-')[0])
     def clone(self):
         trigger = Trigger.objects.get(pk=self.id)
         trigger.id = None
@@ -36,5 +39,7 @@ class Trigger(models.Model):
         return trigger
 
 def active_triggers(user):
-    triggers = filter(lambda detail: binded_account(user, kind=detail['kind'], require_password=detail['require_password']), TRIGGER_DETAILS)
+    triggers = TRIGGER_DETAILS
+    for detail in triggers: 
+        detail['active'] = binded_account(user, kind=detail['kind'], require_password=detail['require_password'])
     return triggers

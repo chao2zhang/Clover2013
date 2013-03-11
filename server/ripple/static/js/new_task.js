@@ -28,7 +28,7 @@ $(document).ready(function(){
         $("input#id_action_destination").freezeInput(hints[0]);
         $("textarea#id_action_content").freezeInput(hints[1]);
     };
-    $(".trigger-grid").click(function() {
+    $(".trigger-grid[active='True']").click(function() {
         $(".trigger-grid").removeClass("chosen");
         $(this).addClass("chosen");
         updateTriggerKind($(this).attr("id"));
@@ -40,7 +40,7 @@ $(document).ready(function(){
             scrollTop: $("#action-panel").offset().top
         }, 1000);
     });
-    $(".action-grid").click(function() {
+    $(".action-grid[active='True']").click(function() {
         $(".action-grid").removeClass("chosen");
         $(this).addClass("chosen");
         updateActionKind($(this).attr("id"));

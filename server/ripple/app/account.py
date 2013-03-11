@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from oauth.weibo import *
 from oauth.renren import *
-from utils import account_with_kind, static_unbinded_with_kind, static_with_kind
+from utils import account_with_kind, static_unbind_with_kind, static_with_kind
 
 ACCOUNT_NAMES = (
     "WeiboAccount",
@@ -47,7 +47,7 @@ def binds(user):
     details = []
     for d in ACCOUNT_DETAILS:
         d['account'] = account_with_kind(d['kind'])
-        d['static'] = static_with_kind(d['kind']) if binded_account(user, d['kind']) else static_unbinded_with_kind(d['kind'])
+        d['static'] = static_with_kind(d['kind']) if binded_account(user, d['kind']) else static_unbind_with_kind(d['kind'])
         d['url'] = eval(d['account']).url()
         details.append(d)
     for d in UNAUTHENTICATED_ACCOUNT_DETAILS:

@@ -4,5 +4,5 @@ def account_with_kind(kind):
 def static_with_kind(kind):
     return 'img/%s.png' % kind
 
-def static_unbinded_with_kind(kind):
+def static_unbind_with_kind(kind):
     return 'img/%s_unbinded.png' % kind

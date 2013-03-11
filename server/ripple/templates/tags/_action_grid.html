@@ -1,5 +1,5 @@
 {% load staticfiles %}
-<div id="{{action.action_kind}}" class="span4 action-grid">
-    <img class="action-icon pull-left" src="{% static action.static %}" width="78">
+<div id="{{action.action_kind}}" class="span4 action-grid" active="{{action.active}}">
+    <img class="action-icon pull-left" src="{% if action.active %}{% static action.static %}{% else %}{% static action.static_unbind %}{% endif %}" width="78">
     <div class="action-title pull-left"><h4>{{action.title}}</h4></div>
 </div>

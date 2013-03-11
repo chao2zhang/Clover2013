@@ -59,7 +59,7 @@ def edit_task(request, id):
     task = get_object_or_404(Task, pk=id, user=request.user)
     d = {
         'trigger_kind'      :task.trigger.kind,
-        'trigger_source'    :task.trigger.source,
+        'trigger_tag'       :task.trigger.source,
         'trigger_content'   :task.trigger.content,
         'action_kind'       :task.action.kind,
         'action_destination':task.action.destination,
