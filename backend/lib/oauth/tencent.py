@@ -4,6 +4,7 @@ CLIENT_ID = '801327084'
 CLIENT_SECRET = 'd716ef7ae982cc874c01b351a153ce33'
 AUTH_URI = 'https://open.t.qq.com/cgi-bin/oauth2/authorize'
 TOKEN_URI = 'https://open.t.qq.com/cgi-bin/oauth2/access_token'
+REDIRECT_URI = 'http://127.0.0.1'
 
 class TencentClient(Client):
 	def __init__(self, client_id = CLIENT_ID, client_secret = CLIENT_SECRET):
