@@ -37,7 +37,7 @@ class RenrenConfig:
 		AUTHORIZATION_URI = "http://graph.renren.com/oauth/authorize"
 		ACCESS_TOKEN_URI = "http://graph.renren.com/oauth/token"
 		SESSION_KEY_URI = "http://graph.renren.com/renren_api/session_key"
-		API_SERVER = "http://api.renren.com/restserver.do"
+		API_SERVER = "https://api.renren.com/restserver.do"
 		LOGIN_SUCCESS = "http://graph.renren.com/oauth/login_success.html"
 
 
@@ -107,7 +107,7 @@ class RenrenClient(object):
 				params["access_token"] = self.access_token
 				params["v"] = '1.0'
 				sig = self.hash_params(params);
-				params["sig"] = sig
+				#params["sig"] = sig
 				post_data = None if not params else urllib.urlencode(params)
 				response = urllib.urlopen(RenrenConfig.API_SERVER, post_data).read()
 				j = parse_json(response)
