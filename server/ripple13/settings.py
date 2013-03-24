@@ -11,8 +11,8 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'test.db',                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -72,6 +72,9 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    '/Users/chaozhang/Development/clover/server/ripple13/static',
+    '/home/xc/Desktop/Clover2013/server/ripple/static',
+    '/Users/arapat/Workspace/Clover2013/server/ripple/static',
 )
 
 # List of finder classes that know how to find static files in
@@ -98,6 +101,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'djangoflash.middleware.FlashMiddleware',
 )
 
 ROOT_URLCONF = 'ripple13.urls'
@@ -106,6 +110,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    "templates",
 )
 
 INSTALLED_APPS = (
@@ -119,6 +124,9 @@ INSTALLED_APPS = (
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'django_extensions',
+    'registration',
+    'app',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -143,3 +151,21 @@ LOGGING = {
         },
     }
 }
+
+LOGIN_REDIRECT_URL = '/dashboard/'
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'djangoflash.context_processors.flash',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.request',
+)
+
+ABSOLUTE_URL_OVERRIDES = {
+    'auth.user': lambda u: "/users/%i/" % u.id,
+}
+
+DATETIME_FORMAT = 'Y-m-d H:m:s'
+SHORT_DATETIME_FORMAT = DATETIME_FORMAT
+

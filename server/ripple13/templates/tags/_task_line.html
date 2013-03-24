@@ -1,0 +1,22 @@
+{% load staticfiles %}
+{% load tags %}
+<div class="row-fluid">
+    <div class="span12 task-line clearfix">
+        <a href="{{task.get_absolute_url}}" class="pull-left task-icons clearfix">
+            <img class="trigger-icon pull-left" src="{% static task.trigger.static %}" width="78">
+            <div class="pull-left right-triangle"></div>
+            <img class="action-icon pull-left" src="{% static task.action.static %}" width="78">
+        </a>
+        <div class="pull-right task-desc text-right clearfix">
+            <div class="task-title">
+                <a href="{{task.get_absolute_url}}"><h2>{{task.description}}</h2></a>
+            </div>
+            <div class="task-creation">
+                 <a href="{{task.user.get_absolute_url}}" class="recipe-desc_author">{{task.user.username}}</a> 在 {{task.created_at}} 创建
+            </div>
+            <div class="task-usage">
+                有 {{task.count}} 个子波
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,74 @@
+{% extends "dashboard/base.html" %}
+
+{% load tags %}
+{% load staticfiles %}
+
+{% block js %}
+    <script type="text/javascript" src="/static/js/new_task.js"></script>
+{% endblock %}
+
+{% block title %}
+    新涟漪
+{% endblock %}
+
+{% block navbar_js %}
+    $("li#link-new-task").addClass("active");
+{% endblock %}
+
+{% block page_title %}
+<h3>新涟漪</h3>
+{% endblock %}
+
+{% block content %}
+    <div id="trigger-panel">
+        <div class="row-fluid">
+            <div class="span12">
+                <h3>选择信号</h3>
+            </div>
+        </div>
+        {% for trigger in triggers %}
+            {% if forloop.first %}<div class="row-fluid">{% elif forloop.counter0|divisibleby:3 %}</div><div class="row-fluid">{% endif %}
+            {% trigger_grid trigger %}
+            {% if forloop.last %}</div>{% endif %}
+        {% endfor %}
+    </div>
+
+    <div id="action-panel" {%if not form.errors %}class="hide"{% endif %}>
+        <div class="row-fluid">
+            <div class="span12">
+                <h3>选择行动</h3>
+            </div>
+        </div>
+        {% for action in actions %}
+            {% if forloop.first %}<div class="row-fluid">{% elif forloop.counter0|divisibleby:3 %}</div><div class="row-fluid">{% endif %}
+            {% action_grid action %}
+            {% if forloop.last %}</div>{% endif %}
+        {% endfor %}
+    </div>
+
+    <div id="form-panel" {%if not form.errors %}class="hide"{% endif %}>
+        <div class="row-fluid">
+            <div class="span12">
+                <h3>附加信息</h3>
+            </div>
+        </div>
+        <form id="task_new_form" class="form-horizontal" method="post" action="">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            {% for field in form.visible_fields %}
+                <div class="control-group">
+                    {{ field.errors }}
+                    {{ field|label_with_classes:"control-label"}} 
+                    <div class="controls">
+                        {{ field }}
+                    </div>
+                </div>
+            {% endfor %}
+            {% for field in form.hidden_fields %}
+                <div class="hide">{{ field }}</div>
+            {% endfor %}
+            <input class="btn btn-large btn-primary form-button" type="submit" value="创建" />
+        </form>
+    </div>
+
+{% endblock %}

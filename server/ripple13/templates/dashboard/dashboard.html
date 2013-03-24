@@ -1,0 +1,50 @@
+{% extends "dashboard/base.html" %}
+
+{% load staticfiles %}
+{% load tags %}
+
+{% block title %}
+    概览
+{% endblock %}
+
+{% block navbar_js %}
+    $("li#link-dashboard").addClass("active");
+{% endblock %}
+
+{% block page_title %}
+    <h3>概览</h3>
+{% endblock %}
+
+{% block content %}
+
+<div class="row-fluid clearfix">
+    <div id="bind-title" class="span4">
+        <h4>信号</h4>
+    </div>
+    <div id="bind-description" class="span6 offset2">
+        <h4 class="text-right">你在 {% total_accounts %} 个信号里激活了 {% count_accounts request.user %} 个</h4>
+    </div>
+</div>
+
+<div class="row-fluid">
+    {% for bind in binds %}
+        {% if forloop.first %}<div class="row-fluid">{% elif forloop.counter0|divisibleby:6 %}</div><div class="row-fluid">{% endif %}
+        {% bind_item bind %}
+        {% if forloop.last %}</div>{% endif %}
+    {% endfor %}
+</div>
+
+<div class="row-fluid">
+    <div id="task-title" class="span4">
+        <h4>涟漪</h4>
+    </div>
+    <div id="task-description" class="span6 offset2">
+        <h4 class="text-right">你有 {% count_tasks request.user %} 个涟漪</h4>
+    </div>
+</div>
+
+{% for task in tasks %}
+    {% task_line task %}
+{% endfor %}
+
+{% endblock %}

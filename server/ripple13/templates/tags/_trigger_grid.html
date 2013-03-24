@@ -1,0 +1,5 @@
+{% load staticfiles %}
+<div id="{{trigger.trigger_kind}}" class="span4 trigger-grid cleafix" active="{{trigger.active}}">
+    <img class="trigger-icon pull-left" src="{% if trigger.active %}{% static trigger.static %}{% else %}{% static trigger.static_unbind %}{% endif %}" width="78">
+    <div class="trigger-title pull-left"><h4>{{trigger.title}}</h4></div>
+</div>

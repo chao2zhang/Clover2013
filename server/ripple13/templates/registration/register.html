@@ -1,0 +1,30 @@
+{% extends "registration/base.html" %}
+
+{% load tags %}
+
+{% block title %}
+    注册
+{% endblock %}
+
+{% block navbar_js %}
+    $("li#link-register").addClass("active");
+{% endblock %}
+
+{% block content %}
+
+<form class="form-horizontal" method="post" action="/accounts/register/">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {% for field in form %}
+        <div class="control-group">
+            {{ field.errors }}
+            {{ field|label_with_classes:"control-label"}} 
+            <div class="controls">
+                {{ field }}
+            </div>
+        </div>
+    {% endfor %}
+    <input class="btn btn-large btn-success form-button" type="submit" value="注册"/>
+</form>
+
+{% endblock %}

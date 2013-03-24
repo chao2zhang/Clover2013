@@ -1,0 +1,31 @@
+{% extends "dashboard/base.html" %}
+
+{% load url from future %}
+{% load tags %}
+{% load staticfiles %}
+
+{% block title %}
+    绑定信号
+{% endblock %}
+
+{% block navbar_js %}
+    $("li#link-bind").addClass("active");
+{% endblock %}
+
+{% block page_title %}
+    <h3>绑定信号</h3>
+{% endblock %}
+
+{% block page_description %}
+    <h4 class="pull-right">你在 {% total_accounts %} 个信号里激活了 {% count_accounts request.user %} 个</h4>
+{% endblock %}
+
+{% block content %}
+
+{% for bind in binds %}
+    {% if forloop.first %}<div class="row-fluid">{% elif forloop.counter0|divisibleby:3 %}</div><div class="row-fluid">{% endif %}
+    {% bind_grid bind %}
+    {% if forloop.last %}</div>{% endif %}
+{% endfor %}
+
+{% endblock %}
