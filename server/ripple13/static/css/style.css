@@ -12,6 +12,10 @@ hr {
     border-top-color: #3a87ad;
 }
 
+input, textarea {
+    box-sizing: content-box;
+}
+
 .form-horizontal .control-label {
     width: 120px;
 }
