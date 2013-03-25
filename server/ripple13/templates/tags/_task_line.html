@@ -1,11 +1,11 @@
-{% load staticfiles %}
+{% load static %}{% get_static_prefix as STATIC_PREFIX %}
 {% load tags %}
 <div class="row-fluid">
     <div class="span12 task-line clearfix">
         <a href="{{task.get_absolute_url}}" class="pull-left task-icons clearfix">
-            <img class="trigger-icon pull-left" src="{% static task.trigger.static %}" width="78">
+            <img class="trigger-icon pull-left" src="{{ STATIC_PREFIX }}{{ task.trigger.static }}" width="78">
             <div class="pull-left right-triangle"></div>
-            <img class="action-icon pull-left" src="{% static task.action.static %}" width="78">
+            <img class="action-icon pull-left" src="{{ STATIC_PREFIX }}{{ task.action.static }}" width="78">
         </a>
         <div class="pull-right task-desc text-right clearfix">
             <div class="task-title">

@@ -1,8 +1,9 @@
-{% load staticfiles %}
+{% load static %}{% get_static_prefix as STATIC_PREFIX %}
+{% get_static_prefix as STATIC_PREFIX %}
 <div class="span4 bind-grid">
     <a href="{{bind.url}}" class="">
         <div class="bind-in-details">
-            <img class="bind-icon pull-left" src="{% static bind.static %}" width="78"/>
+            <img class="bind-icon pull-left" src="{{ STATIC_PREFIX }}{{ bind.static }}" width="78"/>
             <div class="bind-title pull-left"><h4>{{bind.title}}</h4></div>
         </div>
     </a>

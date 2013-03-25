@@ -35,3 +35,10 @@ urlpatterns = patterns('',
     url(r'^tasks/list_hot/$', 'app.views.list_hot', name="list_hot"),
     url(r'^users/(?P<id>\d+)/$', 'app.views.list', name="list_task"),
 )
+
+from django.conf import settings
+
+if settings.DEBUG:
+    urlpatterns += patterns('django.contrib.staticfiles.views',
+        url(r'^static/(?P<path>.*)$', 'serve'),
+    )

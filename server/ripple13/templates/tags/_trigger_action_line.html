@@ -1,13 +1,13 @@
-{% load staticfiles %}
+{% load static %}{% get_static_prefix as STATIC_PREFIX %}
 {% load tags %}
 <div class="row-fluid trigger-action-line">
     <div id="{{task.trigger.kind}}" class="span5 trigger-grid">
-        <img class="trigger-icon pull-left" src="{% static task.trigger.static %}" width="78">
+        <img class="trigger-icon pull-left" src="{{ STATIC_PREFIX }}{{ task.trigger.static }}" width="78">
         <div class="trigger-title-large pull-left"><h4>{{task.trigger|trigger_title}}</h4></div>
     </div>
     <div class="right-triangle"></div>
     <div id="{{task.action.kind}}" class="span5 action-grid">
-        <img class="action-icon pull-left" src="{% static task.action.static %}" width="78">
+        <img class="action-icon pull-left" src="{{ STATIC_PREFIX }}{{ task.action.static }}" width="78">
         <div class="action-title-large pull-left"><h4>{{task.action|action_title}}</h4></div>
     </div>
 </div>

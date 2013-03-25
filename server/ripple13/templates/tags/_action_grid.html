@@ -1,5 +1,5 @@
-{% load staticfiles %}
+{% load static %}{% get_static_prefix as STATIC_PREFIX %}
 <div id="{{action.action_kind}}" class="span4 action-grid" active="{{action.active}}">
-    <img class="action-icon pull-left" src="{% if action.active %}{% static action.static %}{% else %}{% static action.static_unbind %}{% endif %}" width="78">
+    <img class="action-icon pull-left" src="{% if action.active %}{{ STATIC_PREFIX }}{{ action.static }}{% else %}{{ STATIC_PREFIX }}{{ action.static_unbind }}{% endif %}" width="78">
     <div class="action-title pull-left"><h4>{{action.title}}</h4></div>
 </div>
